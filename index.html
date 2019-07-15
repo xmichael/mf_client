@@ -14,6 +14,8 @@
   <!-- extras -->
 
   <!-- local -->
+  <link rel="stylesheet" href="/external/leaflet-sidebar/L.Control.Sidebar.css">
+
   <link rel="stylesheet" href="/css/style.css">
 
   <title></title>
@@ -21,6 +23,17 @@
 
 <body>
   <div id="map"></div>
+  <div id="sidebar">
+    <h1>NDVI Comparison</h1>
+
+    <p>Compatison between 1840 tithe point and modern NDVI values</p>
+    <p>This can be used to compare Arable and Pasture fields in 1840 with </p>
+
+    <h2>How was this data produced</h2>
+    <p>The NDVI data are obtained and processed by ENVSYS using the QGIS 'Zonal Statistics' tool</p>
+    <p>The 1840 tithe productions point data originate from the National Library of Wales</p>
+  </div>
+
   <div class="spinner"></div>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -36,8 +49,9 @@
 
   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin="">
   </script>
+  <script src="/external/leaflet-sidebar/L.Control.Sidebar.js"></script>
 
-  <script src="/js/lib/TileLayer.Grayscale.js"></script>
+  <script src="/external/TileLayer.Grayscale.js"></script>
 
   <!-- Static GeoJSON files. Good for caching/compression etc. -->
   <script src="/data/nlw_1840.geojson" type="text/javascript"></script>

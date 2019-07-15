@@ -46,10 +46,22 @@ $(document).ready(function() {
         case 'arable, meadow':
         case 'meadow and pasture':
         case 'meadow':
-        return L.circleMarker(latlng, {radius: 8, weight: 1, opacity: 1, fillopacity: 0.8, color: "DarkGreen"});
+          return L.circleMarker(latlng, {
+            radius: 8,
+            weight: 1,
+            opacity: 1,
+            fillopacity: 0.8,
+            color: "DarkGreen"
+          });
           break;
         case 'pasture':
-          return L.circleMarker(latlng, {radius: 8, weight: 1, opacity: 1, fillopacity: 0.8, color: "GoldenRod"});
+          return L.circleMarker(latlng, {
+            radius: 8,
+            weight: 1,
+            opacity: 1,
+            fillopacity: 0.8,
+            color: "GoldenRod"
+          });
           break;
         default:
           break;
@@ -113,7 +125,7 @@ $(document).ready(function() {
 
 
   // Add base layers
-  L.control.layers(basemaps, extramaps, {
+  L.control.layers({}, extramaps, {
     collapsed: false
   }).addTo(map);
 
@@ -121,6 +133,16 @@ $(document).ready(function() {
   boundary.addTo(map);
 
   spinner.hide();
+
+  //Add Sidebar
+  var sidebar = L.control.sidebar('sidebar', {
+    position: 'left'
+  });
+  setTimeout(function () {
+      sidebar.show();
+  }, 500);
+  
+  map.addControl(sidebar);
 
 
 

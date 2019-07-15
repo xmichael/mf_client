@@ -1,13 +1,16 @@
 /************** map *****************/
-
 html, body, #map {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
+
+h1, h2 {
+  color: darkgreen;
+}
 
 /****** specify global spinner ******/
 .spinner {
@@ -26,8 +29,13 @@ html, body, #map {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /************************/
