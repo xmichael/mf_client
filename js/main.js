@@ -119,8 +119,8 @@ $(document).ready(function() {
       }}) */
 
   var extramaps = {
-    "NDVI Field Boundaries (27/6/2019)": ndvi_fb,
-    "Llangynfelin land use (1840)": tithe
+    "NDVI Field Boundaries <span style='color:red'>(27 June 2019)</span>": ndvi_fb,
+    "Llangynfelin land use <span style='color:red'>(1840)</span>": tithe
   };
 
 
@@ -130,9 +130,30 @@ $(document).ready(function() {
   }).addTo(map);
 
 
-  boundary.addTo(map);
+  /******** TABS ******/
+  ///// ORAL HISTORIES
+$('#tab-oh').on('click',function(){
+  $('#map').hide();
+});
+////// NDVI
+$('#tab-ndvi').on('click',function(){
+  $('#map').show();
+});
 
-  spinner.hide();
+  /*********************/
+
+
+
+  boundary.addTo(map);
+  // tithe.addTo(map);
+
+  ndvi_fb.addTo(map);
+  spinner.show();
+  setTimeout(function () {
+    spinner.hide()
+  }, 2500);
+
+  //spinner.hide();
 
   //Add Sidebar
   var sidebar = L.control.sidebar('sidebar', {
@@ -141,7 +162,7 @@ $(document).ready(function() {
   setTimeout(function () {
       sidebar.show();
   }, 500);
-  
+
   map.addControl(sidebar);
 
 
