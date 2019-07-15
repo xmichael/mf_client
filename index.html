@@ -22,6 +22,18 @@
 </head>
 
 <body>
+  <!-- TABS (aka "dynamic toggle pills") -->
+  <div class="tabs">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#ndvi">NDVI comparison</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#oral_histories">Oral Histories</a>
+      </li>
+    </ul>
+  </div>
+
   <div id="map"></div>
   <div id="sidebar">
     <h1>NDVI Comparison</h1>
@@ -30,7 +42,7 @@
     <p>This can be used to compare Arable and Pasture fields in 1840 with </p>
 
     <h2>How was this data produced</h2>
-    <p>The NDVI data are obtained and processed by ENVSYS using the QGIS 'Zonal Statistics' tool</p>
+    <p>The processed NDVI data are obtained from ENVSYS and are produced using the QGIS 'Zonal Statistics' tool</p>
     <p>The 1840 tithe productions point data originate from the National Library of Wales</p>
   </div>
 

@@ -12,6 +12,7 @@ h1, h2 {
   color: darkgreen;
 }
 
+
 /****** specify global spinner ******/
 .spinner {
   /* display:none; */
@@ -38,4 +39,17 @@ h1, h2 {
   }
 }
 
+/* Bootstrap overrides */
+.tabs > .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: darkgreen;
+}
+
+.tabs {
+  background-color: black;
+}
+
+.nav-item > a {
+  color: gray;
+}
 /************************/
