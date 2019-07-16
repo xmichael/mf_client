@@ -104,8 +104,8 @@ $(document).ready(function() {
   // Map
   var map = L.map('map', {
     center: [52.50, -4.0],
-    zoom: 13,
-    minZoom: 13,
+    zoom: 11,
+    minZoom: 11,
     maxZoom: 17,
     fadeAnimation: false,
     layers: [osmgray]
@@ -161,13 +161,39 @@ $(document).ready(function() {
 
   //spinner.hide();
 
-  //Add Sidebar
+  /*****Add Sidebar *****/
   var sidebar = L.control.sidebar('sidebar', {
     position: 'left'
   });
   setTimeout(function() {
     sidebar.show();
   }, 500);
+  /*********************/
+
+  /****** LEGEND ********/
+  var legend = L.control({
+    position: 'bottomright'
+  });
+
+  legend.onAdd = function(map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    div.innerHTML += `<h3>Legend</h3>
+    <img src="/images/NDVI_Legend.jpg" width="25" height="50">
+    <i>
+      High Productivity (NDVI)<br>
+      Low Productivity (NDVI)
+    </i>
+    `
+    return div;
+  };
+
+  legend.addTo(map);
+
+  /*********************/
+
 
   map.addControl(sidebar);
 

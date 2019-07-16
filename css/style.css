@@ -12,7 +12,31 @@ h1, h2 {
   color: darkgreen;
 }
 
+/****** leafelt legend ******/
 
+.legend {
+    /* disable until we are happy with it */
+    display: none;
+
+    line-height: 18px;
+    color: #555;
+
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 10px;
+
+}
+.legend i {
+    width: 160px;
+    height: 80px;
+    float: right;
+    clear: both;
+    margin-left: 8px;
+    margin-top: 8px;
+    opacity: 0.7;
+}
 /****** specify global spinner ******/
 .spinner {
   /* display:none; */
