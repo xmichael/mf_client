@@ -33,8 +33,15 @@ $(document).ready(function() {
   var tithe = L.geoJSON(nlw_1840, {
     minZoom: 8,
     maxZoom: 17,
+    onEachFeature: function(feature, layer) {
+      if (feature.properties) {
+        var popupContent = '<dt>Land Use:</dt><dd>' + feature.properties.land_use + '</dd>';
+        popupContent += '<dt>Tithe Value:</dt><dd>' + feature.properties.tithe_value + '</dd>';
+        popupContent += '</dl>'
+        layer.bindPopup(popupContent);
+      }
+    },
     pointToLayer: function(feature, latlng) {
-      //return L.circleMarker(latlng, geojsonMarkerOptions);
       switch (feature.properties.land_use) {
         case 'Arable':
         case 'arable':
@@ -119,8 +126,8 @@ $(document).ready(function() {
       }}) */
 
   var extramaps = {
-    "NDVI Field Boundaries <span style='color:red'>(27 June 2019)</span>": ndvi_fb,
-    "Llangynfelin land use <span style='color:red'>(1840)</span>": tithe
+    "NDVI Field Boundaries <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
+    "Llangynfelin land use <span class='text-info'>(1840)</span>": tithe
   };
 
 
@@ -132,24 +139,23 @@ $(document).ready(function() {
 
   /******** TABS ******/
   ///// ORAL HISTORIES
-$('#tab-oh').on('click',function(){
-  $('#map').hide();
-});
-////// NDVI
-$('#tab-ndvi').on('click',function(){
-  $('#map').show();
-});
+  $('#tab-oh').on('click', function() {
+    $('#map').hide();
+  });
+  ////// NDVI
+  $('#tab-ndvi').on('click', function() {
+    $('#map').show();
+  });
 
   /*********************/
 
 
 
   boundary.addTo(map);
-  // tithe.addTo(map);
-
-  ndvi_fb.addTo(map);
+  tithe.addTo(map);
+  //ndvi_fb.addTo(map);
   spinner.show();
-  setTimeout(function () {
+  setTimeout(function() {
     spinner.hide()
   }, 2500);
 
@@ -159,8 +165,8 @@ $('#tab-ndvi').on('click',function(){
   var sidebar = L.control.sidebar('sidebar', {
     position: 'left'
   });
-  setTimeout(function () {
-      sidebar.show();
+  setTimeout(function() {
+    sidebar.show();
   }, 500);
 
   map.addControl(sidebar);
