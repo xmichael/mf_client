@@ -35,7 +35,8 @@ $(document).ready(function() {
     maxZoom: 17,
     onEachFeature: function(feature, layer) {
       if (feature.properties) {
-        var popupContent = '<dt>Land Use:</dt><dd>' + feature.properties.land_use + '</dd>';
+        var popupContent = '<h5>1840</h5><dt>Land Use:</dt><dd>' +
+          feature.properties.land_use + '</dd>';
         popupContent += '<dt>Tithe Value:</dt><dd>' + feature.properties.tithe_value + '</dd>';
         popupContent += '</dl>'
         layer.bindPopup(popupContent);
@@ -88,6 +89,47 @@ $(document).ready(function() {
     }
   });
 
+  // FB extra
+  var fb_extra = L.geoJSON(fb_extra_geojson, {
+    minZoom: 8,
+    maxZoom: 17,
+    onEachFeature: function(feature, layer) {
+      if (feature.properties) {
+        var popupContent = '<h5>1840</h5><dt>Tithe Value(sum):</dt><dd>' +
+          feature.properties.tithe_total + '</dd>';
+        popupContent += '</dl>'
+        layer.bindPopup(popupContent);
+      }
+    },
+    style: function(feature) {
+      switch (feature.properties.bins) {
+        case 1:
+          return { color: '#edf8fb'};
+          break;
+        case 2:
+          return { color: '#ccece6'};
+          break;
+        case 3:
+          return { color: '#99d8c9'};
+          break;
+        case 4:
+          return { color: '#66c2a4'};
+          break;
+        case 5:
+          return { color: '#41ae76'};
+          break;
+        case 6:
+          return { color: '#238b45'};
+          break;
+        case 7:
+          return { color: '#005824'};
+          break;
+        default:
+          return { color: '#000' }
+      }
+    }
+  });
+
   /* Dyfi Biosphere Reserver outline */
   var boundary = L.geoJSON(dataservices_boundary, {
     minZoom: 3,
@@ -127,7 +169,8 @@ $(document).ready(function() {
 
   var extramaps = {
     "NDVI Field Boundaries <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
-    "Llangynfelin land use <span class='text-info'>(1840)</span>": tithe
+    "Llangynfelin land use <span class='text-info'>(1840)</span>": tithe,
+    "Llangynfelin projected tithe values <span class='text-info'>(1840)</span>": fb_extra
   };
 
 
@@ -138,6 +181,10 @@ $(document).ready(function() {
 
 
   /******** TABS ******/
+  ///// Opportunity Maps
+  $('#tab-opportunity').on('click', function() {
+    $('#map').hide();
+  });
   ///// ORAL HISTORIES
   $('#tab-oh').on('click', function() {
     $('#map').hide();

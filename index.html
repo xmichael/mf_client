@@ -31,6 +31,9 @@
       <li class="nav-item">
         <a class="nav-link" id='tab-oh' data-toggle="pill" href="#oral_histories">Oral Histories</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" id='tab-opportunity' data-toggle="pill" href="#oral_histories">Opportunity Maps</a>
+      </li>
     </ul>
   </div>
 
@@ -47,12 +50,16 @@
     <p>The 1840 tithe productions point data originate from the National Library of Wales</p>
 
     <h3>NDVI Legend</h3>
-    <div class="float-left mr-1">
+    <div class="d-flex flex-row">
       <img src="/images/NDVI_Legend.jpg" width="25" height="50">
-    </div>
-    <div class="text-justify">
-      <i>High Productivity (NDVI)<br>
-        Low Productivity (NDVI)</i>
+      <div class="d-flex flex-column justify-content-between">
+        <div class="pl-1">
+          High Productivity (NDVI)
+        </div>
+        <div class="pl-1">
+          Low Productivity (NDVI)
+        </div>
+      </div>
     </div>
   </div>
 
@@ -79,6 +86,7 @@
   <script src="/data/nlw_1840.geojson" type="text/javascript"></script>
   <script src="/data/dyfi_boundary.geojson" type="text/javascript"></script>
   <script src="/data/dyfi_field_productivity.geojson" type="text/javascript"></script>
+  <script src="/data/fb_extra.geojson" type="text/javascript"></script>
 
   <script src="/js/main.js"></script>
 
