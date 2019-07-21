@@ -35,9 +35,11 @@ $(document).ready(function() {
     maxZoom: 17,
     onEachFeature: function(feature, layer) {
       if (feature.properties) {
-        var popupContent = '<h5>1840</h5><dt>Land Use:</dt><dd>' +
+        var popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
           feature.properties.land_use + '</dd>';
-        popupContent += '<dt>Tithe Value:</dt><dd>' + feature.properties.tithe_value + '</dd>';
+          popupContent += '<dt>Tithe Value:</dt><dd>' + feature.properties.tithe_value + '</dd>';
+          popupContent += '<dt>Land owner:</dt><dd>' + feature.properties.landowner + '</dd>';
+          popupContent += '<dt>Occupier:</dt><dd>' + feature.properties.occupier + '</dd>';
         popupContent += '</dl>'
         layer.bindPopup(popupContent);
       }
@@ -95,7 +97,7 @@ $(document).ready(function() {
     maxZoom: 17,
     onEachFeature: function(feature, layer) {
       if (feature.properties) {
-        var popupContent = '<h5>1840</h5><dt>Tithe Value(sum):</dt><dd>' +
+        var popupContent = '<h5>1840s crop yield</h5><dt>Tithe Value(sum):</dt><dd>' +
           feature.properties.tithe_total + '</dd>';
         popupContent += '</dl>'
         layer.bindPopup(popupContent);
@@ -104,13 +106,16 @@ $(document).ready(function() {
     style: function(feature) {
       switch (feature.properties.bins) {
         case 1:
-          return { color: '#edf8fb'};
+          // return { color: '#edf8fb'};
+          return { color: '#99d8c9'};
           break;
         case 2:
-          return { color: '#ccece6'};
+          // return { color: '#ccece6'};
+          return { color: '#99d8c9'};
           break;
         case 3:
-          return { color: '#99d8c9'};
+        // return { color: '#99d8c9'};
+          return { color: '#66c2a4'};
           break;
         case 4:
           return { color: '#66c2a4'};
