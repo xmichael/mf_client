@@ -49,7 +49,7 @@
     <p>The processed NDVI data are obtained from ENVSYS and are produced using the QGIS 'Zonal Statistics' tool</p>
     <p>The 1840 tithe productions point data originate from the National Library of Wales</p>
 
-    <h3>NDVI Legend</h3>
+    <h2>NDVI-themed Field Boundaries</h2>
     <div class="d-flex flex-row">
       <img src="/images/NDVI_Legend.jpg" width="25" height="50">
       <div class="d-flex flex-column justify-content-between">
@@ -61,21 +61,24 @@
         </div>
       </div>
     </div>
-    <h3 class="mt-2">Crop production Legend</h3>
-    <div class="d-flex flex-row">
-      <svg width="15" height="60">
-        <!-- <rect fill="rgb(237,248,233)" width="15" height="15" y="0"></rect> -->
-        <rect fill="rgb(186,228,179)" width="15" height="15" y="45"></rect>
-        <rect fill="rgb(116,196,118)" width="15" height="15" y="30"></rect>
-        <rect fill="rgb(49,163,84)" width="15" height="15" y="15"></rect>
-        <rect fill="rgb(0,109,44)" width="15" height="15" y="0"></rect>
-      </svg>
-      <div class="d-flex flex-column justify-content-between">
-        <div class="pl-1">
-          High Yield
+    <div class="mt-2">
+      <h2>Land Use legend</h2>
+      <div class="d-flex flex-column">
+        <div>
+          <svg width="10" height="10">
+            <circle fill="Teal" r="5" cx="5" cy="5"></circle>
+          </svg>
+          Arable / Meadow
         </div>
-        <div class="pl-1">
-          Low Yield
+        <div>
+          <svg width="10" height="10">
+            <circle fill="GoldenRod" r="5" cx="5" cy="5"></circle>
+          </svg> Pasture
+        </div>
+        <div>
+          <svg width="10" height="10">
+            <circle fill="DarkGreen" r="5" cx="5" cy="5"></circle>
+          </svg> Woodland
         </div>
       </div>
     </div>
@@ -104,7 +107,7 @@
   <script src="/data/nlw_1840.geojson" type="text/javascript"></script>
   <script src="/data/dyfi_boundary.geojson" type="text/javascript"></script>
   <script src="/data/dyfi_field_productivity.geojson" type="text/javascript"></script>
-  <script src="/data/fb_extra.geojson" type="text/javascript"></script>
+  <!-- <script src="/data/fb_extra.geojson" type="text/javascript"></script> -->
 
   <script src="/js/main.js"></script>
 
