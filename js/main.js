@@ -136,8 +136,8 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.50, -4.0],
-    zoom: 11,
+    center: [52.50, -3.95],
+    zoom: 13,
     minZoom: 11,
     maxZoom: 17,
     fadeAnimation: false,
@@ -187,10 +187,11 @@ $(document).ready(function() {
   /*********************/
 
 
-
+  /* sequence matters for click events on map (lastest grabs clicks) */
   boundary.addTo(map);
-  tithe.addTo(map);
   ndvi_fb.addTo(map)
+  tithe.addTo(map);
+
   //ndvi_fb.addTo(map);
   spinner.show();
   setTimeout(function() {
