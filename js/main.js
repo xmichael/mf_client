@@ -29,6 +29,19 @@ $(document).ready(function() {
 
   // Overlay layers
 
+  // Overlay layers (TMS)
+
+  /* 1930s DS data */
+  var ds = L.tileLayer('data/tiles/DS/{z}/{x}/{y}.png', {
+    tms: true,
+    opacity: 0.5,
+    attribution: "| This work is based on data provided through www.VisionofBritain.org.uk and uses historical Land Utilisation Survey map material which is copyright of The Land Utilisation Survey of Great Britain, 1933-49, copyright Audrey N. Clark.",
+    minZoom: 12,
+    maxNativeZoom: 14,
+    maxZoom: 20
+  });
+
+
   // 1840 NLW tithe data
   var tithe = L.geoJSON(nlw_1840, {
     minZoom: 8,
@@ -160,15 +173,15 @@ $(document).ready(function() {
 
   var extramaps = {
     "NDVI Field Boundaries <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
-    "Llangynfelin land use <span class='text-info'>(1840)</span>": tithe
-    };
+    "Llangynfelin land use <span class='text-info'>(1840)</span>": tithe,
+    "Dudley Stamp <span class='text-info'>(1930s)</span>": ds
+  };
 
 
   // Add base layers
   L.control.layers({}, extramaps, {
     collapsed: false
   }).addTo(map);
-
 
   /******** TABS ******/
   ///// Opportunity Maps
@@ -191,8 +204,8 @@ $(document).ready(function() {
   boundary.addTo(map);
   ndvi_fb.addTo(map)
   tithe.addTo(map);
+  //ds.addTo(map);
 
-  //ndvi_fb.addTo(map);
   spinner.show();
   setTimeout(function() {
     spinner.hide()
