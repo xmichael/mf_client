@@ -45,7 +45,8 @@ $(document).ready(function() {
   // 1840 NLW tithe data
   var tithe = L.geoJSON(nlw_1840, {
     minZoom: 8,
-    maxZoom: 17,
+    maxNativeZoom: 15,
+    maxZoom: 18,
     onEachFeature: function(feature, layer) {
       if (feature.properties) {
         var popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
@@ -102,16 +103,24 @@ $(document).ready(function() {
   });
 
 
-  // NDVI & FB modern
-  var ndvi_fb = L.geoJSON(dyfi_field_productivity, {
-    minZoom: 8,
-    maxZoom: 17,
-    style: function(feature) {
-      return {
-        color: feature.properties.colour_fil
-      };
-    }
+  // NDVI & FB modern tiles
+  var ndvi_fb = L.tileLayer('data/tiles/modern_fb_ndvi_tiles/{z}/{x}/{y}.png', {
+    minZoom: 10,
+    maxNativeZoom: 14,
+    maxZoom: 18
   });
+
+
+  // NDVI & FB modern
+  // var ndvi_fb = L.geoJSON(dyfi_field_productivity, {
+  //   minZoom: 8,
+  //   maxZoom: 17,
+  //   style: function(feature) {
+  //     return {
+  //       color: feature.properties.colour_fil
+  //     };
+  //   }
+  // });
 
   // FB extra
   // var fb_extra = L.geoJSON(fb_extra_geojson, {
@@ -137,7 +146,7 @@ $(document).ready(function() {
   /* Dyfi Biosphere Reserver outline */
   var boundary = L.geoJSON(dataservices_boundary, {
     minZoom: 3,
-    maxZoom: 17,
+    maxZoom: 18,
     style: {
       "color": "#000000",
       "stroke": true,
@@ -152,7 +161,7 @@ $(document).ready(function() {
     center: [52.50, -3.95],
     zoom: 13,
     minZoom: 11,
-    maxZoom: 17,
+    maxZoom: 18,
     fadeAnimation: false,
     layers: [osmgray]
   });
@@ -209,7 +218,7 @@ $(document).ready(function() {
   spinner.show();
   setTimeout(function() {
     spinner.hide()
-  }, 2500);
+  }, 1500);
 
   //spinner.hide();
 
