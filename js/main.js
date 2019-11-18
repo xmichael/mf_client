@@ -34,7 +34,7 @@ $(document).ready(function() {
   /* 1930s DS data */
   var ds = L.tileLayer('data/tiles/DS/{z}/{x}/{y}.png', {
     tms: true,
-    opacity: 0.5,
+    opacity: 1,
     attribution: "| This work is based on data provided through www.VisionofBritain.org.uk and uses historical Land Utilisation Survey map material which is copyright of The Land Utilisation Survey of Great Britain, 1933-49, copyright Audrey N. Clark.",
     minZoom: 12,
     maxNativeZoom: 14,
@@ -49,9 +49,23 @@ $(document).ready(function() {
     minZoom: 8,
     maxZoom: 17,
     style: function(feature) {
-      return {
-        color: feature.properties.Style
-      };
+	return {
+	  color: feature.properties.Style,
+	  fillColor: feature.properties.Style,
+	  fillOpacity: 0.5
+	};
+    },
+    onEachFeature: function(feature, layer) {
+      if (feature.properties) {
+        var popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
+          feature.properties.land_use_facet + '</dd>';
+        popupContent += '<dt>Field Number:</dt><dd>' + feature.properties.field_number + '</dd>';
+        popupContent += '<dt>Field Name:</dt><dd>' + feature.properties.field_name + '</dd>';
+        popupContent += '<dt>Land owner:</dt><dd>' + feature.properties.landowner_facet + '</dd>';
+        popupContent += '<dt>Occupier:</dt><dd>' + feature.properties.occupier_facet + '</dd>';
+        popupContent += '</dl>'
+        layer.bindPopup(popupContent);
+      }
     }
   });
 
@@ -61,7 +75,6 @@ $(document).ready(function() {
     maxNativeZoom: 14,
     maxZoom: 18
   });
-
 
   // NDVI & FB modern
   // var ndvi_fb = L.geoJSON(dyfi_field_productivity, {
@@ -123,6 +136,12 @@ $(document).ready(function() {
   L.control.layers({}, extramaps, {
     collapsed: false
   }).addTo(map);
+
+  // ndvi_fb should be on top
+  map.on("overlayadd", function (event) {
+     ndvi_fb.bringToFront();
+  });
+
 
   /******** TABS ******/
   ///// Opportunity Maps
