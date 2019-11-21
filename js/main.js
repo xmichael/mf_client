@@ -42,18 +42,31 @@ $(document).ready(function() {
   });
 
 
-  // 1840s FB & apportionment
+  // Contemporary FBs
 
-
-  var tithe = L.geoJSON(land_use_1840s, {
+  var fb_now = L.geoJSON(land_use_now, {
     minZoom: 8,
     maxZoom: 17,
     style: function(feature) {
-	return {
-	  color: feature.properties.Style,
-	  fillColor: feature.properties.Style,
-	  fillOpacity: 0.5
-	};
+      return {
+        color: feature.properties.Style,
+        fillColor: feature.properties.Style,
+        fillOpacity: 0.5
+      };
+    }
+  });
+
+
+  // 1840s FB & apportionment
+  var fb_1840 = L.geoJSON(land_use_1840s, {
+    minZoom: 8,
+    maxZoom: 17,
+    style: function(feature) {
+      return {
+        color: feature.properties.Style,
+        fillColor: feature.properties.Style,
+        fillOpacity: 0.5
+      };
     },
     onEachFeature: function(feature, layer) {
       if (feature.properties) {
@@ -103,7 +116,7 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.45, -4.0],
+    center: [52.47, -4.05],
     zoom: 13,
     minZoom: 11,
     maxZoom: 18,
@@ -126,9 +139,10 @@ $(document).ready(function() {
       }}) */
 
   var extramaps = {
-    "NDVI Field Boundaries <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
-    "Land Use <span class='text-info'>(1840)</span>": tithe,
-    "Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds
+    "Land Use <span class='text-info'>(1840)</span>": fb_1840,
+    "Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
+    "Land Use <span class='text-info'>(Contemporary)</span>": fb_now,
+    "NDVI <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
   };
 
 
@@ -138,8 +152,8 @@ $(document).ready(function() {
   }).addTo(map);
 
   // ndvi_fb should be on top
-  map.on("overlayadd", function (event) {
-     ndvi_fb.bringToFront();
+  map.on("overlayadd", function(event) {
+    ndvi_fb.bringToFront();
   });
 
 
@@ -163,8 +177,9 @@ $(document).ready(function() {
   /* sequence matters for click events on map (lastest grabs clicks) */
   boundary.addTo(map);
   //ndvi_fb.addTo(map)
-  tithe.addTo(map);
+  fb_1840.addTo(map);
   ds.addTo(map);
+  //fb_now.addTo(map);
 
   spinner.show();
   setTimeout(function() {
