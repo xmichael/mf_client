@@ -38,13 +38,13 @@ $(document).ready(function() {
     attribution: "| This work is based on data provided through www.VisionofBritain.org.uk and uses historical Land Utilisation Survey map material which is copyright of The Land Utilisation Survey of Great Britain, 1933-49, copyright Audrey N. Clark.",
     minZoom: 12,
     maxNativeZoom: 14,
-    maxZoom: 20
+      maxZoom: 20
   });
 
 
   // Contemporary FBs
 
-  var fb_now = L.geoJSON(land_use_now, {
+  var landuse_now = L.geoJSON(land_use_now, {
     minZoom: 8,
     maxZoom: 17,
     style: function(feature) {
@@ -57,20 +57,9 @@ $(document).ready(function() {
   });
 
 
-  // 1840s FB & apportionment
-  var fb_1840 = L.geoJSON(land_use_1840s, {
-    minZoom: 8,
-    maxZoom: 17,
-    style: function(feature) {
-      return {
-        color: feature.properties.Style,
-        fillColor: feature.properties.Style,
-        fillOpacity: 0.5
-      };
-    },
-    onEachFeature: function(feature, layer) {
-      if (feature.properties) {
-        var popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
+    // Used for quering data when 'click'ing on layer
+    /*
+        var 1840s_popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
           feature.properties.land_use_facet + '</dd>';
         popupContent += '<dt>Field Number:</dt><dd>' + feature.properties.field_number + '</dd>';
         popupContent += '<dt>Field Name:</dt><dd>' + feature.properties.field_name + '</dd>';
@@ -78,27 +67,15 @@ $(document).ready(function() {
         popupContent += '<dt>Occupier:</dt><dd>' + feature.properties.occupier_facet + '</dd>';
         popupContent += '</dl>'
         layer.bindPopup(popupContent);
-      }
-    }
-  });
+     */
 
-  // NDVI & FB modern tiles
-  var ndvi_fb = L.tileLayer('data/tiles/modern_fb_ndvi_tiles/{z}/{x}/{y}.png', {
+  // 1840s land use tiles
+  var landuse_1840s = L.tileLayer('data/tiles/1840s_land_use_tiles/{z}/{x}/{y}.png', {
     minZoom: 10,
     maxNativeZoom: 14,
-    maxZoom: 18
+    maxZoom: 18,
+    opacity: 0.7
   });
-
-  // NDVI & FB modern
-  // var ndvi_fb = L.geoJSON(dyfi_field_productivity, {
-  //   minZoom: 8,
-  //   maxZoom: 17,
-  //   style: function(feature) {
-  //     return {
-  //       color: feature.properties.colour_fil
-  //     };
-  //   }
-  // });
 
 
   /* Dyfi Biosphere Reserver outline */
@@ -139,10 +116,9 @@ $(document).ready(function() {
       }}) */
 
   var extramaps = {
-    "Land Use <span class='text-info'>(1840)</span>": fb_1840,
+    "Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
     "Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
-    "Land Use <span class='text-info'>(Contemporary)</span>": fb_now,
-    "NDVI <span class='text-info'>(27 June 2019)</span>": ndvi_fb,
+    "Land Use <span class='text-info'>(Contemporary)</span>": landuse_now,
   };
 
 
@@ -151,9 +127,9 @@ $(document).ready(function() {
     collapsed: false
   }).addTo(map);
 
-  // ndvi_fb should be on top
+  // landuse_1840s should be on top
   map.on("overlayadd", function(event) {
-    ndvi_fb.bringToFront();
+    landuse_1840s.bringToFront();
   });
 
 
@@ -176,10 +152,9 @@ $(document).ready(function() {
 
   /* sequence matters for click events on map (lastest grabs clicks) */
   boundary.addTo(map);
-  //ndvi_fb.addTo(map)
-  fb_1840.addTo(map);
+  landuse_1840s.addTo(map);
   ds.addTo(map);
-  //fb_now.addTo(map);
+  //landuse_now.addTo(map);
 
   spinner.show();
   setTimeout(function() {
