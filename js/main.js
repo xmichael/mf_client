@@ -11,19 +11,19 @@ $(document).ready(function() {
   //  .. OpenStreetMap
   var osm = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-    minZoom: 8,
+    minZoom: 4,
     maxZoom: 17
   });
 
   var osmgray = L.tileLayer.grayscale('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-    minZoom: 8,
+    minZoom: 4,
     maxZoom: 17
   });
 
   //  white background
   var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {
-    minZoom: 8,
+    minZoom: 4,
     maxZoom: 17
   });
 
@@ -45,8 +45,9 @@ $(document).ready(function() {
   // Contemporary FBs
 
   var landuse_now = L.geoJSON(land_use_now, {
-    minZoom: 8,
-    maxZoom: 17,
+      minZoom: 8,
+      maxNativeZoom: 17,
+    maxZoom: 20,
     style: function(feature) {
       return {
         color: feature.properties.Style,
@@ -56,6 +57,7 @@ $(document).ready(function() {
     }
   });
 
+
   // 1840s land use tiles
   var landuse_1840s = L.tileLayer('data/tiles/1840s_land_use_tiles/{z}/{x}/{y}.png', {
     minZoom: 10,
@@ -63,6 +65,16 @@ $(document).ready(function() {
     maxZoom: 18,
     opacity: 0.7
   });
+
+  // ALC2 Grades
+  var ALC2 = L.tileLayer('data/tiles/ALC2/{z}/{x}/{y}.png', {
+      minZoom: 5,
+      attribution: "| © Crown copyright. Mapping derived from soils data © Cranfield University (NSRI) and for the Controller of HMSO 2020 © Crown copyright 2020, the Met Office. Contains OS data © Crown copyright and database right 2020. Contains Natural Resources Wales information © Natural Resources Wales and Database Right.",
+    maxNativeZoom: 13,
+    maxZoom: 20,
+    opacity: 0.5
+  });
+
 
 
   /* Dyfi Biosphere Reserver outline */
@@ -80,9 +92,9 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.47, -4.05],
-    zoom: 13,
-    minZoom: 11,
+    center: [52.55, -4.06],
+    zoom: 10,
+    minZoom: 9,
     maxZoom: 18,
     fadeAnimation: false,
     layers: [osmgray]
@@ -105,7 +117,8 @@ $(document).ready(function() {
   var extramaps = {
     "Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
     "Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
-    "Land Use <span class='text-info'>(Contemporary)</span>": landuse_now
+      "Land Use <span class='text-info'>(Contemporary)</span>": landuse_now,
+      "Predictive ALC map v.2 <span class='text-info'>(Contemporary)</span>": ALC2
   };
 
 
@@ -125,9 +138,11 @@ $(document).ready(function() {
 
   /* sequence matters for click events on map (lastest grabs clicks) */
   boundary.addTo(map);
-  landuse_1840s.addTo(map);
-  ds.addTo(map);
-  //landuse_now.addTo(map);
+  //landuse_1840s.addTo(map);
+  //ds.addTo(map);
+    landuse_now.addTo(map);
+    ALC2.addTo(map);
+
 
   spinner.show();
   setTimeout(function() {
