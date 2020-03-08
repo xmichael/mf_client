@@ -21,7 +21,7 @@ $(document).ready(function() {
     maxZoom: 17
   });
 
-  //  .. White background
+  //  white background
   var white = L.tileLayer("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAAA1BMVEX///+nxBvIAAAAH0lEQVQYGe3BAQ0AAADCIPunfg43YAAAAAAAAAAA5wIhAAAB9aK9BAAAAABJRU5ErkJggg==", {
     minZoom: 8,
     maxZoom: 17
@@ -38,7 +38,7 @@ $(document).ready(function() {
     attribution: "| This work is based on data provided through www.VisionofBritain.org.uk and uses historical Land Utilisation Survey map material which is copyright of The Land Utilisation Survey of Great Britain, 1933-49, copyright Audrey N. Clark.",
     minZoom: 12,
     maxNativeZoom: 14,
-      maxZoom: 20
+    maxZoom: 20
   });
 
 
@@ -55,19 +55,6 @@ $(document).ready(function() {
       };
     }
   });
-
-
-    // Used for quering data when 'click'ing on layer
-    /*
-        var 1840s_popupContent = '<h5>1840s Land Use</h5><dt>Land Use:</dt><dd>' +
-          feature.properties.land_use_facet + '</dd>';
-        popupContent += '<dt>Field Number:</dt><dd>' + feature.properties.field_number + '</dd>';
-        popupContent += '<dt>Field Name:</dt><dd>' + feature.properties.field_name + '</dd>';
-        popupContent += '<dt>Land owner:</dt><dd>' + feature.properties.landowner_facet + '</dd>';
-        popupContent += '<dt>Occupier:</dt><dd>' + feature.properties.occupier_facet + '</dd>';
-        popupContent += '</dl>'
-        layer.bindPopup(popupContent);
-     */
 
   // 1840s land use tiles
   var landuse_1840s = L.tileLayer('data/tiles/1840s_land_use_tiles/{z}/{x}/{y}.png', {
@@ -118,7 +105,7 @@ $(document).ready(function() {
   var extramaps = {
     "Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
     "Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
-    "Land Use <span class='text-info'>(Contemporary)</span>": landuse_now,
+    "Land Use <span class='text-info'>(Contemporary)</span>": landuse_now
   };
 
 
@@ -132,20 +119,6 @@ $(document).ready(function() {
     landuse_1840s.bringToFront();
   });
 
-
-  /******** TABS ******/
-  ///// Opportunity Maps
-  $('#tab-opportunity').on('click', function() {
-    $('#map').hide();
-  });
-  ///// ORAL HISTORIES
-  $('#tab-oh').on('click', function() {
-    $('#map').hide();
-  });
-  ////// NDVI
-  $('#tab-ndvi').on('click', function() {
-    $('#map').show();
-  });
 
   /*********************/
 
@@ -163,43 +136,7 @@ $(document).ready(function() {
 
   //spinner.hide();
 
-  /*****Add Sidebar *****/
-  var sidebar = L.control.sidebar('sidebar', {
-    position: 'left'
-  });
-  setTimeout(function() {
-    sidebar.show();
-  }, 500);
   /*********************/
-
-  /****** LEGEND ********/
-  var legend = L.control({
-    position: 'bottomright'
-  });
-
-  legend.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div', 'info legend');
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    div.innerHTML += `<h3>Legend</h3>
-    <img src="/images/NDVI_Legend.jpg" width="25" height="50">
-    <i>
-      High Productivity (NDVI)<br>
-      Low Productivity (NDVI)
-    </i>
-    `
-    return div;
-  };
-
-  legend.addTo(map);
-
-  /*********************/
-
-
-  map.addControl(sidebar);
-
-
 
   // Fit to overlay bounds
   //map.fitBounds([[52.330180936, -3.36476263021], [52.885998209, -4.39698523643]]);
