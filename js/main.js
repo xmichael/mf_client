@@ -115,10 +115,10 @@ $(document).ready(function() {
   }).addTo(map);
 
   // landuse_1840s should be on top
+
   map.on("overlayadd", function(event) {
     landuse_1840s.bringToFront();
   });
-
 
   /*********************/
 
@@ -135,6 +135,47 @@ $(document).ready(function() {
   }, 1500);
 
   //spinner.hide();
+
+  /*********************/
+  /****** LEGEND ********/
+  var legend = L.control({
+    position: 'bottomright'
+  });
+
+  legend.onAdd = function(map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    div.innerHTML += `<h3>Legend</h3>
+    <div class="d-flex flex-column">
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
+          </svg>
+          Arable
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#f3fe5f" r="10" cx="10" cy="10"></circle>
+          </svg> Pasture
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#83BD89" r="10" cx="10" cy="10"></circle>
+          </svg> Woodland
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#AB6FAC" r="10" cx="10" cy="10"></circle>
+          </svg> Settlement
+        </div>
+      </div>
+    `
+    return div;
+  };
+
+  legend.addTo(map);
 
   /*********************/
 

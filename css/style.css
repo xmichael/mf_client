@@ -13,11 +13,7 @@ h1, h2 {
 }
 
 /****** leafelt legend ******/
-
 .legend {
-    /* disable until we are happy with it */
-    display: none;
-
     line-height: 18px;
     color: #555;
 
@@ -29,6 +25,14 @@ h1, h2 {
 
 }
 .legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+/*
+.legend i {
     width: 160px;
     height: 80px;
     float: right;
@@ -37,6 +41,7 @@ h1, h2 {
     margin-top: 8px;
     opacity: 0.7;
 }
+*/
 
 /****** specify global spinner ******/
 .spinner {
