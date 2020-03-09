@@ -184,7 +184,10 @@ $(document).ready(function() {
         </div>
       </div>
     `
-    return div;
+      var draggable = new L.Draggable(div);
+      draggable.enable()
+
+      return div;
   };
 
   legend.addTo(map);
@@ -249,6 +252,9 @@ $(document).ready(function() {
         </div>
       </div>
     `
+    var draggable = new L.Draggable(div);
+    draggable.enable()
+
     return div;
   };
 
