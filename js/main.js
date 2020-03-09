@@ -165,6 +165,9 @@ $(document).ready(function() {
     <div class="d-flex flex-row">
     <div class="d-flex flex-column mr-3 border-right">
         <div>
+          <h6 class="text-center">Land use</h6>
+        </div>
+        <div>
           <svg width="20" height="20">
             <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
           </svg>
@@ -187,6 +190,9 @@ $(document).ready(function() {
         </div>
       </div>
     <div class="d-flex flex-column">
+        <div>
+          <h6 class="text-center">Predictive ALC grades</h6>
+        </div>
         <div d-flex flex-row>
           <svg width="20" height="20">
             <circle fill="#0182fe" r="10" cx="10" cy="10"></circle>
