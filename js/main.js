@@ -154,15 +154,12 @@ $(document).ready(function() {
   /*********************/
   /****** LEGEND ********/
   var legend = L.control({
-    position: 'bottomright'
+    position: 'bottomleft'
   });
 
   legend.onAdd = function(map) {
-
     var div = L.DomUtil.create('div', 'info legend');
-
-    // loop through our density intervals and generate a label with a colored square for each interval
-    div.innerHTML += `<h3>Legend</h3>
+    div.innerHTML += `<h5>Legend</h5>
     <div class="d-flex flex-column">
         <div>
           <svg width="20" height="20">
@@ -191,6 +188,71 @@ $(document).ready(function() {
   };
 
   legend.addTo(map);
+
+  /**************************/
+  /****** LEGEND ALC ********/
+  var legend_alc = L.control({
+    position: 'bottomright'
+  });
+
+  legend_alc.onAdd = function(map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML += `<h5>Legend ALC2</h5>
+    <div class="d-flex flex-column">
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#0182fe" r="10" cx="10" cy="10"></circle>
+          </svg>
+          1  Excellent quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#c1f9ff" r="10" cx="10" cy="10"></circle>
+          </svg> 
+          2  Very good quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#008200" r="10" cx="10" cy="10"></circle>
+          </svg>
+          3a Good quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#a7fca4" r="10" cx="10" cy="10"></circle>
+          </svg>
+          3b moderate quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#fbfa65" r="10" cx="10" cy="10"></circle>
+          </svg>
+          4  poor quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#b4875e" r="10" cx="10" cy="10"></circle>
+          </svg>
+          5  very poor quality agr. land
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#fec355" r="10" cx="10" cy="10"></circle>
+          </svg>
+          NA Non-agricultural
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#fe6256" r="10" cx="10" cy="10"></circle>
+          </svg>
+          U  Urban
+        </div>
+      </div>
+    `
+    return div;
+  };
+
+  legend_alc.addTo(map);
 
   /*********************/
 
