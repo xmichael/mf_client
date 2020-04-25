@@ -92,8 +92,8 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.55, -4.06],
-    zoom: 10,
+    center: [52.47, -4.055],
+    zoom: 14,
     minZoom: 9,
     maxZoom: 18,
     fadeAnimation: false,
