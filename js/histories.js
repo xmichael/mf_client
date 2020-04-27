@@ -25,19 +25,21 @@ function add_info(_map){
 function create_html_popup( feature ){
   var props = feature.properties;
   return `
-  <h4>${props["Name of Farmer"]}</h4>
-  <h5>${props["Name of Farm"]}</h5>
-  <h6>${props["Date of Recording"]}</h6>
-  <hr/>
   <div>
-    <p class="text-justify">${props["Summary"]}<p>
-  </div>
-  <hr/>
-  <div>
-    <audio controls>
-      <source src="/data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
-    </audio>
-  </div>
+      <h4>${props["Name of Farmer"]}</h4>
+      <h5>${props["Name of Farm"]}</h5>
+      <h6>${props["Date of Recording"]}</h6>
+      <hr/>
+      <div>
+        <p class="text-justify">${props["Summary"]}<p>
+      </div>
+      <hr/>
+      <div>
+        <audio controls>
+          <source src="/data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
+        </audio>
+      </div>
+    </div>
   `
 }
 
