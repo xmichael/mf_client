@@ -31,7 +31,7 @@ function create_html_popup( feature ){
       <h6>${props["Date of Recording"]}</h6>
       <hr/>
       <div>
-        <p class="text-justify">${props["Summary"]}<p>
+        <p class="text-justify">${window.location.search=="?lang=cy"?props["Cymraeg"]:props["Summary"]}<p>
       </div>
       <hr/>
       <div>
@@ -104,8 +104,8 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.55, -4.000],
-    zoom: 14,
+    center: [52.60, -3.76],
+    zoom: 11,
     minZoom: 9,
     maxZoom: 18,
     fadeAnimation: false,
