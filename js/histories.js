@@ -1,6 +1,6 @@
 'use strict';
 
-import histories_data from '/data/histories/histories_data.js';
+import histories_data from '../data/histories/histories_data.js';
 
 function add_info(_map){
   /** create interactive info panel */
@@ -36,7 +36,7 @@ function create_html_popup( feature ){
       <hr/>
       <div>
         <audio controls>
-          <source src="/data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
+          <source src="./data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
         </audio>
       </div>
     </div>
