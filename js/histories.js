@@ -37,6 +37,8 @@ function create_html_popup( feature ){
       <div>
         <audio controls>
           <source src="./data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
+          <source src="./data/histories/mp3/${props["Clip Name"]}.mp3" type="audio/mpeg">
+          Your browser does not support the audio element
         </audio>
       </div>
     </div>
@@ -104,7 +106,7 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.60, -3.76],
+    center: [52.67, -3.76],
     zoom: 11,
     minZoom: 9,
     maxZoom: 18,
