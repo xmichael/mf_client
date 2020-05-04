@@ -62,12 +62,18 @@ function add_histories_markers(_map, _histories, _info){
         return L.marker(latlng, {icon: historiesIcon})
       },
       onEachFeature: function(feature, layer){
+        /** a) On mouse over/out (hover) update the info box.
+        *   b) On mouse click recenter the map
+        */
         layer.on({
     			mouseover: function(e){
             _info.update(layer.feature.properties);
           },
     			mouseout: function(e){
         		_info.update();
+          },
+          click: function(e){
+            _map.panTo(e.target.getLatLng());
           }
         });
         layer.bindPopup(create_html_popup(feature))
@@ -106,8 +112,8 @@ $(document).ready(function() {
 
   // Map
   var map = L.map('map', {
-    center: [52.67, -3.76],
-    zoom: 11,
+    center: [52.6, -3.76],
+    zoom: 10,
     minZoom: 9,
     maxZoom: 18,
     fadeAnimation: false,
