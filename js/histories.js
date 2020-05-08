@@ -1,6 +1,7 @@
 'use strict';
 
 import histories_data from '../data/histories/histories_data.js';
+import {descriptions} from './histories_ui.js'
 
 function add_info(_map){
   /** create interactive info panel */
@@ -24,6 +25,9 @@ function add_info(_map){
 /** Create an HTML div to display a histories feature */
 function create_html_popup( feature ){
   var props = feature.properties;
+  // image path is base/picture[X].jpg
+  var base = props["Clip Name"];
+  var pics = props["Pictures"]? props["Pictures"][0] : undefined
   return `
   <div>
       <h4>${props["Name of Farmer"]}</h4>
@@ -34,10 +38,15 @@ function create_html_popup( feature ){
         <p class="text-justify">${window.location.search=="?lang=cy"?props["Cymraeg"]:props["Summary"]}<p>
       </div>
       <hr/>
+      <button type="button"
+      onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
+        Launch modal
+      </button>
+      <hr/>
       <div>
         <audio controls>
-          <source src="./data/histories/opus/${props["Clip Name"]}.opus" type="audio/ogg">
-          <source src="./data/histories/mp3/${props["Clip Name"]}.mp3" type="audio/mpeg">
+          <source src="./data/histories/opus/${base}.opus" type="audio/ogg">
+          <source src="./data/histories/mp3/${base}.mp3" type="audio/mpeg">
           Your browser does not support the audio element
         </audio>
       </div>
@@ -130,6 +139,12 @@ $(document).ready(function() {
   setTimeout(function() {
     spinner.hide()
   }, 1000);
+
+ /** export Globals -- needed for inline onclick events and for debugging */
+window.GLOBALS = {
+  descriptions : descriptions,
+  leaflet_map : map
+}
 
   /*********************/
 
