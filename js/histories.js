@@ -36,13 +36,13 @@ function create_html_popup( feature ){
       <hr/>
       <div>
         <p class="text-justify">${window.location.search=="?lang=cy"?props["Cymraeg"]:props["Summary"]}<p>
+<p class="text-center">
+  <button type="button"
+  onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
+    See more
+  </button>
+</p>
       </div>
-      <hr/>
-      <button type="button"
-      onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
-        Launch modal
-      </button>
-      <hr/>
       <div>
         <audio controls>
           <source src="./data/histories/opus/${base}.opus" type="audio/ogg">
