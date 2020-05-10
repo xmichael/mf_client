@@ -34,14 +34,14 @@ function create_html_popup( feature ){
       <h5>${props["Name of Farm"]}</h5>
       <h6>${props["Date of Recording"]}</h6>
       <hr/>
-      <div>
-        <p class="text-justify">${window.location.search=="?lang=cy"?props["Cymraeg"]:props["Summary"]}<p>
-<p class="text-center">
-  <button type="button"
-  onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
-    See more
-  </button>
-</p>
+      <div class="text-justify">${window.location.search=="?lang=cy"?
+                  props["Cymraeg"]:props["Summary"]}
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-link"
+          onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
+          See more
+        </button>
       </div>
       <div>
         <audio controls>
