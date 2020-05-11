@@ -3,6 +3,10 @@
 import histories_data from '../data/histories/histories_data.js';
 import {descriptions} from './histories_ui.js'
 
+/** global namespace */
+window.GLOBALS = {};
+/*********************/
+
 function add_info(_map){
   /** create interactive info panel */
   var info = L.control({position:'topright'});
@@ -24,10 +28,14 @@ function add_info(_map){
 
 /** Create an HTML div to display a histories feature */
 function create_html_popup( feature ){
+
   var props = feature.properties;
   // image path is base/picture[X].jpg
   var base = props["Clip Name"];
-  var pics = props["Pictures"]? props["Pictures"][0] : undefined
+  var pics = props["Pictures"]? props["Pictures"][0] : undefined;
+  /* create index by-base needed by onclick handlers */
+  window.GLOBALS.history_props[base] = feature;
+
   return `
   <div>
       <h4>${props["Name of Farmer"]}</h4>
@@ -39,7 +47,7 @@ function create_html_popup( feature ){
       </div>
       <div class="text-center">
         <button type="button" class="btn btn-link"
-          onclick="GLOBALS.descriptions.modal('${base}','${pics}')">
+          onclick="GLOBALS.descriptions.modal('description_modal', GLOBALS.history_props.${base})">
           See more
         </button>
       </div>
@@ -96,6 +104,13 @@ function add_histories_markers(_map, _histories, _info){
 
 $(document).ready(function() {
 
+ /** export Globals -- needed for inline onclick events and for debugging */
+  window.GLOBALS = {
+    history_props: {},   // features dictionary indexed by "Clip Name"
+    descriptions : descriptions, // descriptions UI functions
+    leaflet_map : undefined
+  }
+
   var spinner = $('.spinner');
 
   // Base layers
@@ -129,6 +144,8 @@ $(document).ready(function() {
     layers: [osm]
   });
 
+  window.GLOBALS.leaflet_map = map;
+
   /* sequence matters for click events on map (lastest grabs clicks) */
   boundary.addTo(map);
 
@@ -139,12 +156,6 @@ $(document).ready(function() {
   setTimeout(function() {
     spinner.hide()
   }, 1000);
-
- /** export Globals -- needed for inline onclick events and for debugging */
-window.GLOBALS = {
-  descriptions : descriptions,
-  leaflet_map : map
-}
 
   /*********************/
 
