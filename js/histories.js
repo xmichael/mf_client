@@ -1,7 +1,7 @@
 'use strict';
 
 import histories_data from '../data/histories/histories_data.js';
-import {descriptions} from './histories_ui.js'
+import {descriptions, keywords} from './histories_ui.js'
 
 /** global namespace */
 window.GLOBALS = {};
@@ -89,7 +89,7 @@ function add_histories_markers(_map, _histories, _info){
     			mouseout: function(e){
         		_info.update();
           },
-          click: function(e){
+          click: function(e){ //re-center when user clicks a point
             _map.panTo(e.target.getLatLng());
           }
         });
@@ -98,6 +98,8 @@ function add_histories_markers(_map, _histories, _info){
     });
 
     hist_layer.addTo(_map);
+
+    return hist_layer;
     //marker.bindPopup(popup_long);
     //L.popup().setLatLng(e.latlng).setContent("test").openOn(_map)
 }
@@ -150,12 +152,38 @@ $(document).ready(function() {
   boundary.addTo(map);
 
   var info = add_info(map);
-  add_histories_markers(map, histories_data, info);
+  var hist_layer = add_histories_markers(map, histories_data, info);
 
   spinner.show();
   setTimeout(function() {
     spinner.hide()
   }, 1000);
+
+  //console.log(histories_data);
+  var set = keywords.createSet(histories_data,"Keywords");
+  $('#histories_keywords').html(keywords.createHTML(set));
+
+  keywords.bind(
+    (checked)=>{
+      hist_layer.eachLayer((layer) => {
+        // check each feature's keywords have at least one keyword in the "checked" set
+        for ( var k of layer.feature.properties["Keywords"]){
+            if (checked.has(k)){
+                if ( layer.getElement().style.display = 'none'){
+                  // console.log("re-adding removed layer:" +
+                  //         layer.feature.properties["Clip Name"]);
+                  layer.getElement().style.display = '';
+                }
+                 return;
+            }
+        }
+        // no keyword found. Hide it
+        //console.log("removing layer:" + layer.feature.properties["Clip Name"]);
+        layer.getElement().style.display = 'none';
+
+      });
+
+    });
 
   /*********************/
 

@@ -7,7 +7,7 @@ var descriptions = {
     var farmer = props["Name of Farmer"];
     var farm = props["Name of Farm"];
     var description = props["Description"]
-    var keywords = "keywords"
+    var keywords = props["Keywords"].join()
     var date = props["Date of Recording"]
     var pics = props["Pictures"].length>0 ? props["Pictures"]:
                          ["No image available"];
@@ -89,7 +89,7 @@ var descriptions = {
                     ${_carousel_html}
                     <hr>
                     <h5>Related Material</h5>
-                    Not available
+                    Not currently available
                   </div>
                 </div>
               </div>
@@ -137,26 +137,52 @@ var descriptions = {
 var keywords = {
   // create a keyword set from all GeoJSON features
   // example: createSet( features, "Keywwords-cy")
-  createSet: function (features, property){
+  createSet: function (geojson, property){
     var set = new Set();
-    for ( f of features ){
-      for ( k of f[property]){
+    for ( var f of geojson["features"] ){
+      for ( var k of f["properties"][property]){
         set.add(k);
       }
     }
     return set;
   },
-  // html from keywords
-  createHTML: function( kw_set ){
-    var html=`<ol>`;
-    for ( k of kw_set){
+  /* html from keywords
+  * kw_set: Set of keywords that will become checkboxes
+  * enabled: Subset of kw_set that will be enabled by default
+  */
+  createHTML: function( kw_set, enabled ){
+    var enabled = enabled || new Set();
+
+    var html='<legend>Filter:</legend>';
+    for ( var k of kw_set){
       html+=`
-        <li>${k}</li>
+      <div>`;
+      if ( enabled.has(k)){
+        html+= `<input type="checkbox" id="${k}" name="keyword" value="${k}" checked>`
+      }else{
+         html+=`<input type="checkbox" id="${k}" name="keyword" value="${k}">`;
+      }
+      html+=`
+         <label for="${k}">${k}</label>
+       </div>
       `;
     }
-    html+=`</ol>`;
     return html;
+  }, /* bind handler function that takes a set of all selected checkboxes */
+  bind: function(handler){
+    $("input[name='keyword']").on('change',()=>
+    {
+      var set = this.getSelected();
+      handler(set);
+    });
+  },
+  getSelected: function(){
+    var set = new Set();
+    for ( var k of $("input[name='keyword']:checked") ){
+      set.add(k.value);
+    }
+    return set;
   }
 };
 
-export {descriptions};
+export {descriptions, keywords};

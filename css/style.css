@@ -7,9 +7,12 @@ html, body, #map {
   overflow: hidden;
 }
 
-
 h1, h2 {
   color: darkgreen;
+}
+
+fieldset{
+    overflow-y: scroll;
 }
 
 /****** leafelt legend ******/
