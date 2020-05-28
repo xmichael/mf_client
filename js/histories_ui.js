@@ -48,7 +48,9 @@ var descriptions = {
           `;
     }
 
-    _carousel_html += `
+      //only add carousel prev-next controls when there is more than one image
+      if (pics.length > 1){
+	  _carousel_html += `
           <a class="carousel-control-prev" href="#carouselPictures" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -56,7 +58,9 @@ var descriptions = {
           <a class="carousel-control-next" href="#carouselPictures" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
-          </a>
+          </a>`;
+      }
+    _carousel_html += `
         </div> <!--carousel-->
         `;
 
