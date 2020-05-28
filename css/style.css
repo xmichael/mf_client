@@ -13,6 +13,7 @@ h1, h2 {
 
 fieldset{
     overflow-y: scroll;
+    height: 100vh;
 }
 
 /****** leafelt legend ******/
