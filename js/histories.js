@@ -1,7 +1,7 @@
 'use strict';
 
 import histories_data from '../data/histories/histories_data.js';
-import {descriptions, keywords} from './histories_ui.js'
+import {descriptions, keywords} from './histories_ui.js';
 
 /** global namespace */
 window.GLOBALS = {};
@@ -69,7 +69,7 @@ function add_histories_markers(_map, _histories, _info){
     var historiesIcon = L.icon({
       iconUrl: 'data/histories/mic.png',
       iconSize: [32,47]
-    })
+    });
 
     /** Add markers */
     var hist_layer = L.geoJSON(_histories, {
@@ -93,7 +93,7 @@ function add_histories_markers(_map, _histories, _info){
             _map.panTo(e.target.getLatLng());
           }
         });
-        layer.bindPopup(create_html_popup(feature))
+          layer.bindPopup(create_html_popup(feature));
       }
     });
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
     history_props: {},   // features dictionary indexed by "Clip Name"
     descriptions : descriptions, // descriptions UI functions
     leaflet_map : undefined
-  }
+  };
 
   var spinner = $('.spinner');
 
@@ -178,7 +178,7 @@ $(document).ready(function() {
 	  // If yes, make those features visible
         for ( var k of layer.feature.properties["Keywords"]){
             if (checked.has(k)){
-                if ( layer.getElement().style.display = 'none'){
+                if ( layer.getElement().style.display == 'none'){
                   // console.log("re-adding removed layer:" + layer.feature.properties["Clip Name"]);
                   layer.getElement().style.display = '';
                 }

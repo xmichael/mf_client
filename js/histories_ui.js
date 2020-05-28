@@ -6,9 +6,9 @@ var descriptions = {
     var base = props["Clip Name"];
     var farmer = props["Name of Farmer"];
     var farm = props["Name of Farm"];
-    var description = props["Description"]
-    var keywords = props["Keywords"].join()
-    var date = props["Date of Recording"]
+      var description = props["Description"];
+      var keywords = props["Keywords"].join();
+      var date = props["Date of Recording"];
     var pics = props["Pictures"].length>0 ? props["Pictures"]:
                          ["No image available"];
     /** Assumes paths are ./base/pictures[0].jpg */
@@ -17,17 +17,17 @@ var descriptions = {
     var _carousel_html = `
     <div id="carouselPictures" class="carousel" data-interval="false" data-ride="carousel">
                           <ol class="carousel-indicators my-4">
-                          `
+                          `;
     for (var i=0; i<pics.length; i++){
       if ( i == 0){
         _carousel_html += `
         <li data-target="#carouselPictures" data-slide-to="0" class="active"></li>
-        `
+        `;
       }
       else{
         _carousel_html += `
         <li data-target="#carouselPictures" data-slide-to="${i}"></li>
-        `
+        `;
       }
     }
 
@@ -103,7 +103,7 @@ var descriptions = {
           </div>
        </div>
       </div> <!-- modal-dialog -->
-    `
+    `;
     return html;
   },
   createTestHTML: function(feature){
@@ -128,7 +128,7 @@ var descriptions = {
           </div>
        </div>
       </div> <!-- modal-dialog -->
-    `
+    `;
     return html;
   },
   // Example: modal("description_modal", feature)
@@ -162,7 +162,7 @@ var keywords = {
       html+=`
       <div>`;
       if ( enabled.has(k)){
-        html+= `<input type="checkbox" id="${k}" name="keyword" value="${k}" checked>`
+          html+= `<input type="checkbox" id="${k}" name="keyword" value="${k}" checked>`;
       }else{
          html+=`<input type="checkbox" id="${k}" name="keyword" value="${k}">`;
       }
