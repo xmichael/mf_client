@@ -163,24 +163,33 @@ $(document).ready(function() {
   var set = keywords.createSet(histories_data,"Keywords");
   $('#histories_keywords').html(keywords.createHTML(set));
 
+  /* handler when user clicks on a filter */
   keywords.bind(
     (checked)=>{
       hist_layer.eachLayer((layer) => {
-        // check each feature's keywords have at least one keyword in the "checked" set
+	  // corner-case: when the user deselects all-keywords then enable all features (i.e. none == all aka filters are disabled)
+	  if (checked.size == 0){
+	      //console.log("empty filter. Enabling all features.");
+              layer.getElement().style.display = '';	      
+	      return;
+	  }
+
+          // check each feature's keywords have at least one keyword in the "checked" set.
+	  // If yes, make those features visible
         for ( var k of layer.feature.properties["Keywords"]){
             if (checked.has(k)){
                 if ( layer.getElement().style.display = 'none'){
-                  // console.log("re-adding removed layer:" +
-                  //         layer.feature.properties["Clip Name"]);
+                  // console.log("re-adding removed layer:" + layer.feature.properties["Clip Name"]);
                   layer.getElement().style.display = '';
                 }
                  return;
             }
         }
-        // no keyword found. Hide it
+        // no keyword found. Hide the feature
         //console.log("removing layer:" + layer.feature.properties["Clip Name"]);
         layer.getElement().style.display = 'none';
 
+	  
       });
 
     });
