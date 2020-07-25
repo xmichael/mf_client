@@ -165,6 +165,63 @@ $(document).ready(function() {
     }, 1000);
 
     /*********************/
+    /****** LEGEND ********/
+    var legend = L.control({
+	position: 'bottomright'
+    });
+
+    legend.onAdd = function(map) {
+	var div = L.DomUtil.create('div', 'info legend');
+	div.innerHTML += `
+    <div class="d-flex flex-column">
+      <div class="d-flex flex-row justify-content-center"><h5>Legend</h5></div>
+    <div class="d-flex flex-row">
+    <div class="d-flex flex-column">
+        <div>
+          <h6 class="text-center">Opportunity score</h6>
+        </div>
+        <div d-flex flex-row>
+          <svg width="20" height="20">
+            <circle fill="#fef0d9" r="10" cx="10" cy="10"></circle>
+          </svg>
+          1  Lowest
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#fdcc8a" r="10" cx="10" cy="10"></circle>
+          </svg> 
+          2
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#fc8d59" r="10" cx="10" cy="10"></circle>
+          </svg>
+          3
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#e34a33" r="10" cx="10" cy="10"></circle>
+          </svg>
+          4
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#b30000" r="10" cx="10" cy="10"></circle>
+          </svg>
+          5  Highest
+        </div>
+      </div>
+</div></div>
+    `;
+	var draggable = new L.Draggable(div);
+	draggable.enable()
+
+	return div;
+    };
+
+    legend.addTo(map);
+
+    /*********************/
 
     // Fit to overlay bounds
     //map.fitBounds([[52.330180936, -3.36476263021], [52.885998209, -4.39698523643]]);
