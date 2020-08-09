@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 
   <!-- extras -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesom
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- local -->
   <link rel="stylesheet" href="css/style.css">
 
@@ -22,15 +23,32 @@
 <body>
   <div class="container-fluid h-100">
     <div class="row h-100">
-      <div class="col-sm-2 d-none d-sm-block">
+      <div class="col-sm-3 d-none d-sm-block">
         <div id="sidebar">
           <!-- <h3 class="text-center">Filters</h3> -->
-          <fieldset id="food_keywords">
+          <fieldset id="op_params">
+	    <h5 class="text-muted">Contraints</h5>
+	    <hr/>
+	    <input type="checkbox" id="arable" name="arable" value="low" checked>
+	    <label for="arable">Previously arable</label><br>
+	    <p>
+	    <h5 class="text-muted">Risk weights</h5>
+	    <hr/>
+	    <label for="carbonrisk">Carbon risk weight</label><br>
+	    <input type="range" id="carbonrisk" name="carbonrisk" min="0" max="3" value="1" step="0.5" oninput="carbonrisk_output.value = carbonrisk.value;" >
+	    <output id="carbonrisk_output" name="carbonrisk_output" for="carbonrisk">1</output>
+
+    	    <label for="erosionrisk">Erosion risk weight</label><br>
+	    <input type="range" id="erosionrisk" name="erosionrisk" min="0" max="3" value="1" step="0.25" oninput="erosionrisk_output.value = erosionrisk.value;" >
+	    <output id="erosionrisk_output" name="erosionrisk_output" for="erosionrisk">1</output>
+	    <p>
+	    	<button type="button" id="submit" class="btn btn-info"><i class="fa fa-repeat"></i><span>  Recalculate</span> </button>
           </fieldset>
         </div>
       </div>
-      <div class="col-sm-10">
-        <div id="map"></div>
+      <div class="col-sm-9">
+        <div id="map">
+	<!-- <button type="button" id="sidebarCollapse" class="btn btn-info"><i class="fa fa-bars fa-align-left"></i><span>Customise</span> </button> -->
       </div>
     </div>
 

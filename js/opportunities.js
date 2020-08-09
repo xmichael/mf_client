@@ -214,7 +214,7 @@ $(document).ready(function() {
 </div></div>
     `;
 	var draggable = new L.Draggable(div);
-	draggable.enable()
+	draggable.enable();
 
 	return div;
     };
