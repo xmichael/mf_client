@@ -6,6 +6,35 @@ import op_data from '../data/opportunities/opport_wgs84.js';
 window.GLOBALS = {};
 /*********************/
 
+function set_spinner(timeout){
+    var spinner = $('.spinner');
+    spinner.show();
+    setTimeout(function() {
+	spinner.hide();
+    }, timeout);
+
+}
+
+function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _historical, _constraints){
+    if ( _carbonscore * _erosionscore == 0 ){
+	return 0;
+    }
+    if (_constraints.force_historical && (_historical == 0)){
+	return 0;
+    }
+    
+    var score = ((_constraints.carbonweight * _carbonscore) +
+		 (_constraints.erosionweight * _erosionscore) + _historical) / 3;
+    
+    //console.log( _carbonscore, _erosionscore, _historical, _constraints.erosionweight, _constraints.carbonweight );
+    return score.toFixed(1);
+}
+
+function calculate_opportunity_score( props ){
+    var score = calculate_opportunity_score_algorithm(props["carbon_score"],props["erosion_score"],props["historical_score"],window.GLOBALS.op_constraints);
+    return score;
+}
+
 function add_info(_map){
     /** create interactive info panel */
     var info = L.control({position:'topright'});
@@ -21,7 +50,7 @@ function add_info(_map){
       <b>Erosion score (0-5)</b>: ${props["erosion_score"]}<br/>
       <b>Carbon score (0-5)</b>: ${props["carbon_score"]}<br/>
       <b>Historical score (0,1)</b>: ${props["historical_score"]}<br/>
-      <b>Opportunity score</b>: ${props["OPPORTUNITY_SCORE"]}`
+      <b>Opportunity score</b>: ${calculate_opportunity_score(props)}`
 			       : 'Click on a <b>field</b> for extra info');
     };
 
@@ -48,7 +77,7 @@ function create_html_popup( feature ){
       <b>Erosion score (0-5)</b>: ${props["erosion_score"]}<br/>
       <b>Carbon score (0-5)</b>: ${props["carbon_score"]}<br/>
       <b>Historical score (0,1)</b>: ${props["historical_score"]}<br/>
-      <b>Opportunity score</b>: ${props["OPPORTUNITY_SCORE"]}
+      <b>Opportunity score</b>: ${calculate_opportunity_score(props)}
     </div>
   `;
 }
@@ -58,7 +87,8 @@ function add_opportunities_polygons(_map, _opportunities, _info){
     /** Add features */
 
     function style(feature) {
-	var d = feature.properties["OPPORTUNITY_SCORE"]; 
+	// var d = feature.properties["OPPORTUNITY_SCORE"];
+	var d = calculate_opportunity_score( feature.properties );
 	var style = {
             weight: 1,
             opacity: 0.65,
@@ -105,19 +135,47 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 
     op_layer.addTo(_map);
 
-    return op_layer;
     //marker.bindPopup(popup_long);
     //L.popup().setLatLng(e.latlng).setContent("test").openOn(_map)
+
+    return op_layer;
+}
+
+/* Initialize window.GLOBALS.op_constraints from the input values on the sidebar controls */
+async function op_constraints_refresh(){
+    var carbonweight = document.getElementById("carbonweight_output").value;
+    var erosionweight = document.getElementById("erosionweight_output").value;
+    var force_historical = document.getElementById("force_historical").checked;
+
+    window.GLOBALS.op_constraints={
+	"carbonweight" : carbonweight,
+	"erosionweight" : erosionweight,
+	"force_historical" : force_historical
+    };
+
+    //remove previous op_layer if it exists
+    if(window.GLOBALS.op_layer){
+	window.GLOBALS.leaflet_map.removeLayer(window.GLOBALS.op_layer);
+    }
+    
+    window.GLOBALS.op_layer = add_opportunities_polygons(window.GLOBALS.leaflet_map, op_data, window.GLOBALS.info);
+}
+
+/* submit/refresh button callback */
+function submit_cb(){
+    set_spinner(2000);
+    op_constraints_refresh();
 }
 
 $(document).ready(function() {
 
     /** export Globals -- needed for inline onclick events and for debugging */
     window.GLOBALS = {
-	leaflet_map : undefined
+	leaflet_map : undefined,
+	op_constraints: undefined,
+	info: undefined,
+	op_layer: undefined
     };
-
-    var spinner = $('.spinner');
 
     // Base layers
     //  .. OpenStreetMap
@@ -150,20 +208,22 @@ $(document).ready(function() {
 	layers: [osm]
     });
 
-    window.GLOBALS.leaflet_map = map;
-
     /* sequence matters for click events on map (lastest grabs clicks) */
     boundary.addTo(map);
-    var info = add_info(map);
 
-    var opportunities_layer = add_opportunities_polygons(map, op_data, info);
+    window.GLOBALS.leaflet_map = map;
+    window.GLOBALS.info = add_info(map);
+
+    
+    $('#carbonweight').val(1);
+    $('#erosionweight').val(1);
+    //note: "checked" DOM property is value, but "checked" HTML attribute is default value
+    document.getElementById("force_historical").checked = true;
+
+    op_constraints_refresh();
     
     /////////////////////////////
-    spinner.show();
-    setTimeout(function() {
-	spinner.hide();
-    }, 1000);
-
+    set_spinner(1000);
     /*********************/
     /****** LEGEND ********/
     var legend = L.control({
@@ -221,6 +281,8 @@ $(document).ready(function() {
 
     legend.addTo(map);
 
+
+    $('#submit').click(submit_cb);
     /*********************/
 
     // Fit to overlay bounds
