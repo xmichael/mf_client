@@ -283,6 +283,9 @@ $(document).ready(function() {
 
 
     $('#submit').click(submit_cb);
+
+    //enable all bootstrap tooltips (per documentation)
+    $('[data-toggle="tooltip"]').tooltip();
     /*********************/
 
     // Fit to overlay bounds
