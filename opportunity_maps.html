@@ -38,13 +38,13 @@
 	    <hr/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Carbon score" when computing the weighted average'>
 	      <label for="carbonweight">Carbon risk weighting</label><br>
-	      <input type="range" id="carbonweight" name="carbonweight" min="1" max="3" value="1" step="0.5" oninput="carbonweight_output.value = carbonweight.value;" >
+	      <input type="range" id="carbonweight" name="carbonweight" min="0" max="3" value="1" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" >
 	      <output id="carbonweight_output" name="carbonweight_output" for="carbonweight">1</output>
 	    </div>
 	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Erosion score" when computing the weighted average'>
     	      <label for="erosionweight">Erosion risk weighting</label><br>
-	      <input type="range" id="erosionweight" name="erosionweight" min="1" max="3" value="1" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
+	      <input type="range" id="erosionweight" name="erosionweight" min="0" max="3" value="1" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
 	      <output id="erosionweight_output" name="erosionweight_output" for="erosionweight">1</output>
 	    </div>
 	    <p>
