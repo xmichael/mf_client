@@ -36,6 +36,12 @@
 	    <p/>
 	    <h5 class="text-muted">Risk weighting</h5>
 	    <hr/>
+	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Historical score" when computing the weighted average'>
+	      <label for="historicalweight">Historical land use weighting</label><br>
+	      <input type="range" id="historicalweight" name="historicalweight" min="0" max="3" value="1" step="0.25" oninput="historicalweight_output.value = historicalweight.value;" >
+	      <output id="historicalweight_output" name="historicalweight_output" for="historicalweight">1</output>
+	    </div>
+	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Carbon score" when computing the weighted average'>
 	      <label for="carbonweight">Carbon risk weighting</label><br>
 	      <input type="range" id="carbonweight" name="carbonweight" min="0" max="3" value="1" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" >

@@ -16,17 +16,19 @@ function set_spinner(timeout){
 }
 
 function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _historical, _constraints){
-    if ( _carbonscore * _erosionscore == 0 ){
-	return 0;
-    }
+    /* If any of carbon/erosion score is 0 then return 0 (not enforced in the interactive version!)
+      if ( _carbonscore * _erosionscore == 0 ){
+      return 0;
+      }
+    */
     if (_constraints.force_historical && (_historical == 0)){
 	return 0;
     }
     
     var score = ((_constraints.carbonweight * _carbonscore) +
-		 (_constraints.erosionweight * _erosionscore) + _historical) / 3;
+		 (_constraints.erosionweight * _erosionscore) + (_constraints.historicalweight * _historical)) / 3;
     
-    //console.log( _carbonscore, _erosionscore, _historical, _constraints.erosionweight, _constraints.carbonweight );
+    //console.log( _carbonscore, _erosionscore, _historical, _constraints.historicalweight, _constraints.erosionweight, _constraints.carbonweight );
     return score.toFixed(1);
 }
 
@@ -143,11 +145,13 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 
 /* Initialize window.GLOBALS.op_constraints from the input values on the sidebar controls */
 async function op_constraints_refresh(){
+    var historicalweight = document.getElementById("historicalweight_output").value;
     var carbonweight = document.getElementById("carbonweight_output").value;
     var erosionweight = document.getElementById("erosionweight_output").value;
     var force_historical = document.getElementById("force_historical").checked;
 
     window.GLOBALS.op_constraints={
+	"historicalweight" : historicalweight,
 	"carbonweight" : carbonweight,
 	"erosionweight" : erosionweight,
 	"force_historical" : force_historical
@@ -217,6 +221,7 @@ $(document).ready(function() {
     window.GLOBALS.info = add_info(map);
 
     
+    $('#historicalweight').val(1);
     $('#carbonweight').val(1);
     $('#erosionweight').val(1);
     //note: "checked" DOM property is value, but "checked" HTML attribute is default value
