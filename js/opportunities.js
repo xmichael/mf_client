@@ -178,8 +178,10 @@ $(document).ready(function() {
     };
 
     // Base layers
+
     //  .. OpenStreetMap
-    var osm = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+
+    var osmgray = L.tileLayer.grayscale('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 	attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
 	minZoom: 4,
 	maxZoom: 17
@@ -205,7 +207,7 @@ $(document).ready(function() {
 	minZoom: 10,
 	maxZoom: 18,
 	fadeAnimation: false,
-	layers: [osm]
+	layers: [osmgray]
     });
 
     /* sequence matters for click events on map (lastest grabs clicks) */
