@@ -47,6 +47,7 @@ function add_geotiff(_map, _url){
 		console.log("georaster:", georaster);
 		var layer = new GeoRasterLayer({
                     georaster: georaster,
+		    attribution: "Produced using outputs from the Welsh Government led Capability, Suitability and Climate Programme project",
 		    minZoom: 1,
 		    maxZoom: 18,
                     opacity: 0.7,
