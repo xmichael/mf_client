@@ -25,8 +25,7 @@ function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _his
 	return 0;
     }
     
-    var score = ((_constraints.carbonweight * _carbonscore) +
-		 (_constraints.erosionweight * _erosionscore) + (_constraints.historicalweight * _historical)) / 3;
+    var score = ((_constraints.carbonweight * _carbonscore) + (_constraints.erosionweight * _erosionscore) + (_constraints.historicalweight * _historical)) / (_constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight);
     
     //console.log( _carbonscore, _erosionscore, _historical, _constraints.historicalweight, _constraints.erosionweight, _constraints.carbonweight );
     return score.toFixed(1);
