@@ -25,9 +25,11 @@ function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _his
 	return 0;
     }
     
-    var score = ((_constraints.carbonweight * _carbonscore) + (_constraints.erosionweight * _erosionscore) + (_constraints.historicalweight * _historical)) / (_constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight);
+    var score_nom = _constraints.carbonweight*_carbonscore + _constraints.erosionweight*_erosionscore + _constraints.historicalweight*_historical;
+    var score_denom = _constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight;
+    var score = score_nom / score_denom;
+    //console.log(`score=${score} nom=${score_nom} denom=${score_denom}`);
     
-    //console.log( _carbonscore, _erosionscore, _historical, _constraints.historicalweight, _constraints.erosionweight, _constraints.carbonweight );
     return score.toFixed(1);
 }
 
@@ -65,7 +67,10 @@ function create_html_popup( feature ){
     var base = props["ogc_fid"];
     var join_message = props["fieldid_1840"] === null ?
 	"No historical arable/pasture landuse found" : `joined to ${props["fieldid_1840"]}`;
-    
+
+    var score = calculate_opportunity_score(props);
+    var _constraints = window.GLOBALS.op_constraints;
+    var score_debug = `${score} = ( ${_constraints.carbonweight}*${props.carbon_score} + ${_constraints.erosionweight} * ${props.erosion_score} + ${_constraints.historicalweight} * ${props.historical_score} ) / (${_constraints.carbonweight} + ${_constraints.erosionweight} + ${_constraints.historicalweight})`;
     return `
   <div>
       <b>ogc_fid</b>: ${props["ogc_fid"]}<br/>
@@ -78,7 +83,8 @@ function create_html_popup( feature ){
       <b>Erosion score (0-5)</b>: ${props["erosion_score"]}<br/>
       <b>Carbon score (0-5)</b>: ${props["carbon_score"]}<br/>
       <b>Historical score (0,1)</b>: ${props["historical_score"]}<br/>
-      <b>Opportunity score</b>: ${calculate_opportunity_score(props)}
+      <b>Opportunity score</b>: ${score}<br/>
+      <b>Score Calculation</b>: ${score_debug}
     </div>
   `;
 }
@@ -144,9 +150,9 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 
 /* Initialize window.GLOBALS.op_constraints from the input values on the sidebar controls */
 async function op_constraints_refresh(){
-    var historicalweight = document.getElementById("historicalweight_output").value;
-    var carbonweight = document.getElementById("carbonweight_output").value;
-    var erosionweight = document.getElementById("erosionweight_output").value;
+    var historicalweight = parseFloat(document.getElementById("historicalweight_output").value);
+    var carbonweight = parseFloat(document.getElementById("carbonweight_output").value);
+    var erosionweight = parseFloat(document.getElementById("erosionweight_output").value);
     var force_historical = document.getElementById("force_historical").checked;
 
     window.GLOBALS.op_constraints={
