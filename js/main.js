@@ -44,26 +44,19 @@ $(document).ready(function() {
 
     // Contemporary FBs
 
-    var landuse_now = L.geoJSON(land_use_now, {
-	minZoom: 8,
-	maxNativeZoom: 17,
-	maxZoom: 20,
-	style: function(feature) {
-	    return {
-		color: feature.properties.Style,
-		fillColor: feature.properties.Style,
-		fillOpacity: 0.5
-	    };
-	}
+    var landuse_now =L.tileLayer('data/tiles/2019_land_use/{z}/{x}/{y}.png', {
+	opacity: 1,
+	minZoom: 10,
+	maxNativeZoom: 14,
+	maxZoom: 18
     });
 
-
     // 1840s land use tiles
-    var landuse_1840s = L.tileLayer('data/tiles/1840s_land_use_tiles/{z}/{x}/{y}.png', {
+    var landuse_1840s = L.tileLayer('data/tiles/1840s_LU_new/{z}/{x}/{y}.png', {
 	minZoom: 10,
 	maxNativeZoom: 14,
 	maxZoom: 18,
-	opacity: 0.7
+	opacity: 1
     });
 
     // ALC2 Grades
@@ -141,12 +134,12 @@ $(document).ready(function() {
     //landuse_1840s.addTo(map);
     //ds.addTo(map);
     landuse_now.addTo(map);
-    ALC2.addTo(map);
+    //ALC2.addTo(map);
 
 
     spinner.show();
     setTimeout(function() {
-	spinner.hide()
+	spinner.hide();
     }, 1500);
 
     //spinner.hide();
