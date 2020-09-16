@@ -168,18 +168,28 @@ $(document).ready(function() {
         </div>
         <div>
           <svg width="20" height="20">
-            <circle fill="#f3fe5f" r="10" cx="10" cy="10"></circle>
+            <circle fill="#fefb69" r="10" cx="10" cy="10"></circle>
           </svg> Pasture
         </div>
         <div>
           <svg width="20" height="20">
-            <circle fill="#83BD89" r="10" cx="10" cy="10"></circle>
+            <circle fill="#17d41a" r="10" cx="10" cy="10"></circle>
+          </svg> Meadow
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#018100" r="10" cx="10" cy="10"></circle>
           </svg> Woodland
         </div>
         <div>
           <svg width="20" height="20">
-            <circle fill="#AB6FAC" r="10" cx="10" cy="10"></circle>
+            <circle fill="#e21ddc" r="10" cx="10" cy="10"></circle>
           </svg> Settlement
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#327eef" r="10" cx="10" cy="10"></circle>
+          </svg> Water
         </div>
       </div>
     <div class="d-flex flex-column">
