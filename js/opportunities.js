@@ -22,14 +22,15 @@ function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _his
       }
     */
     if (_constraints.force_historical && (_historical == 0)){
+	//console.log(`force_historical=${_constraints.force_historical} historical=${_historical}  `);
 	return 0;
     }
     
     var score_nom = _constraints.carbonweight*_carbonscore + _constraints.erosionweight*_erosionscore + _constraints.historicalweight*_historical;
     var score_denom = _constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight;
     var score = score_nom / score_denom;
-    //console.log(`score=${score} nom=${score_nom} denom=${score_denom}`);
-    
+    //console.log(`score=${score} nom=${score_nom} denom=${score_denom}  `);
+    //console.log(`${_constraints.carbonweight}*${_carbonscore} + ${_constraints.erosionweight} * ${_erosionscore} + ${_constraints.historicalweight} * ${_historical} ) / (${_constraints.carbonweight} + ${_constraints.erosionweight} + ${_constraints.historicalweight}`);
     return score.toFixed(1);
 }
 
