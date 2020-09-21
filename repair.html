@@ -21,53 +21,6 @@
 
 <body>
   <div id="map"></div>
-  <div id="sidebar">
-    <h1>Land Use Comparison</h1>
-
-    <p>Comparison between 1840s, 1930s and contemporary land use data</p>
-
-    <h2>How was this data produced</h2>
-    <p>The 1840s land use dataset originates from the National Library of Wales</p>
-    <p>The 1930s land use dataset originates from the Dudley Stamp data product</p>
-    <p>The contemporary land use sample data were provided by ENVSYS</p>
-
-    <div class="mt-2">
-      <h2>Land Use legend</h2>
-      <div class="d-flex flex-column">
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Arable
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#f3fe5f" r="10" cx="10" cy="10"></circle>
-          </svg> Pasture
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#83BD89" r="10" cx="10" cy="10"></circle>
-          </svg> Woodland
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#AB6FAC" r="10" cx="10" cy="10"></circle>
-          </svg> Settlement
-        </div>
-      </div>
-    </div>
-    <hr />
-    <small>
-      &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors
-      &copy; This work is based on data provided through www.VisionofBritain.org.uk
-      and uses historical Land Utilisation Survey map material which is
-      copyright of The Land Utilisation Survey of Great Britain, 1933-49,
-      copyright Audrey N. Clark.
-    </small>
-
-  </div>
-
   <div class="spinner"></div>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -82,11 +35,9 @@
 
   <script src="external/TileLayer.Grayscale.js"></script>
 
-  <!-- Static GeoJSON files. Good for caching/compression etc. -->
-  <!-- switched to tiles:  <script src="data/land_use_now.js" type="text/javascript"></script> -->
   <script src="data/dyfi_boundary.js" type="text/javascript"></script>
 
-  <script src="js/main.js"></script>
+  <script src="js/repair.js"></script>
 
 </body>
 
