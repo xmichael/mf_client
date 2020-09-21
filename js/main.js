@@ -33,7 +33,6 @@ $(document).ready(function() {
 
     /* 1930s DS data */
     var ds = L.tileLayer('data/tiles/DS/{z}/{x}/{y}.png', {
-	tms: true,
 	opacity: 1,
 	attribution: "| This work is based on data provided through www.VisionofBritain.org.uk and uses historical Land Utilisation Survey map material which is copyright of The Land Utilisation Survey of Great Britain, 1933-49, copyright Audrey N. Clark.",
 	minZoom: 12,
