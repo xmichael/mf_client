@@ -91,11 +91,13 @@ $(document).ready(function() {
 	fadeAnimation: false,
 	layers: [osmgray]
     });
-
+    
+    map.attributionControl.setPrefix('');
+    
     var basemaps = {
 	"OpenStreetMap Grayscale": osmgray,
 	"No background": white
-    }
+    };
 
 
 
@@ -142,7 +144,7 @@ $(document).ready(function() {
     }, 1500);
 
     //spinner.hide();
-
+    
     /*********************/
     /****** LEGEND ********/
     var legend = L.control({
@@ -245,9 +247,9 @@ $(document).ready(function() {
         </div>
       </div>
 </div></div>
-    `
+    `;
 	var draggable = new L.Draggable(div);
-	draggable.enable()
+	draggable.enable();
 
 	return div;
     };

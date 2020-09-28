@@ -219,7 +219,9 @@ $(document).ready(function() {
 	fadeAnimation: false,
 	layers: [osmgray]
     });
-
+        
+    map.attributionControl.setPrefix('');
+    
     /* sequence matters for click events on map (lastest grabs clicks) */
     boundary.addTo(map);
 
