@@ -69,7 +69,7 @@ $(document).ready(function() {
 
 
 
-    /* Dyfi Biosphere Reserver outline */
+    /* Dyfi Biosphere Reserve outline */
     var boundary = L.geoJSON(dataservices_boundary, {
 	minZoom: 3,
 	maxZoom: 18,
