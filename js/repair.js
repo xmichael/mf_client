@@ -70,6 +70,8 @@ $(document).ready(function() {
 	fadeAnimation: false,
 	layers: [osmgray]
     });
+    
+    map.attributionControl.setPrefix('');
 
     var basemaps = {
 	"OpenStreetMap Grayscale": osmgray,
@@ -77,8 +79,7 @@ $(document).ready(function() {
     };
 
     var extramaps = {
-	"Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
-	"Land Use <span class='text-info'>(Contemporary)</span>": landuse_now
+	"Land Use <span class='text-info'>(1840s)</span>": landuse_1840s
     };
 
 
