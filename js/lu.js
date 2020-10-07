@@ -58,18 +58,18 @@ $(document).ready(function() {
 	opacity: 1
     });
 
-    // ALC2 Grades
-    var ALC2 = L.tileLayer('data/tiles/ALC2/{z}/{x}/{y}.png', {
-	minZoom: 5,
-	attribution: "| © Crown copyright. Mapping derived from soils data © Cranfield University (NSRI) and for the Controller of HMSO 2020 © Crown copyright 2020, the Met Office. Contains OS data © Crown copyright and database right 2020. Contains Natural Resources Wales information © Natural Resources Wales and Database Right.",
-	maxNativeZoom: 13,
-	maxZoom: 20,
-	opacity: 0.5
-    });
+    // // ALC2 Grades
+    // var ALC2 = L.tileLayer('data/tiles/ALC2/{z}/{x}/{y}.png', {
+    // 	minZoom: 5,
+    // 	attribution: "| © Crown copyright. Mapping derived from soils data © Cranfield University (NSRI) and for the Controller of HMSO 2020 © Crown copyright 2020, the Met Office. Contains OS data © Crown copyright and database right 2020. Contains Natural Resources Wales information © Natural Resources Wales and Database Right.",
+    // 	maxNativeZoom: 13,
+    // 	maxZoom: 20,
+    // 	opacity: 0.5
+    // });
 
 
 
-    /* Dyfi Biosphere Reserve outline */
+    /* Dyfi Biosphere Reserver outline */
     var boundary = L.geoJSON(dataservices_boundary, {
 	minZoom: 3,
 	maxZoom: 18,
@@ -91,9 +91,7 @@ $(document).ready(function() {
 	fadeAnimation: false,
 	layers: [osmgray]
     });
-    
-    map.attributionControl.setPrefix('');
-    
+
     var basemaps = {
 	"OpenStreetMap Grayscale": osmgray,
 	"No background": white
@@ -111,8 +109,7 @@ $(document).ready(function() {
     var extramaps = {
 	"Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
 	"Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
-	"Land Use <span class='text-info'>(Contemporary)</span>": landuse_now,
-	"Predictive ALC map v.2 <span class='text-info'>(Contemporary)</span>": ALC2
+	"Land Use <span class='text-info'>(Contemporary)</span>": landuse_now
     };
 
 
@@ -144,6 +141,18 @@ $(document).ready(function() {
     }, 1500);
 
     //spinner.hide();
+
+    var sidebar = L.control.sidebar('sidebar', {
+        closeButton: true,
+        position: 'left'
+    });
+    map.addControl(sidebar);
+    $('.eng').show();
+    $('.cy').hide();
+    $(".leaflet-sidebar > .close").css('z-index',800);
+    setTimeout(function () {
+        sidebar.show();
+    }, 500);
     
     /*********************/
     /****** LEGEND ********/
@@ -191,59 +200,6 @@ $(document).ready(function() {
           <svg width="20" height="20">
             <circle fill="#327eef" r="10" cx="10" cy="10"></circle>
           </svg> Water
-        </div>
-      </div>
-    <div class="d-flex flex-column">
-        <div>
-          <h6 class="text-center">Predictive ALC grades</h6>
-        </div>
-        <div d-flex flex-row>
-          <svg width="20" height="20">
-            <circle fill="#0182fe" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Excellent quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#c1f9ff" r="10" cx="10" cy="10"></circle>
-          </svg> 
-          Very good quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#008200" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Good quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#a7fca4" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Moderate quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#fbfa65" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Poor quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#b4875e" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Very poor quality agr. land
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#fec355" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Non-agricultural
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#fe6256" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Urban
         </div>
       </div>
 </div></div>
