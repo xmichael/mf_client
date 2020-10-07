@@ -1,7 +1,20 @@
 'use strict';
 
-/* global require */
+/* Change visibility of all elements that have a class "en" or "cy"
+ * depending on "lang" parameter 
+ */
+function show_translated_text(){
+    if (window.location.search=="?lang=cy"){
+	$('.cy').show();
+	$('.en').hide();
+    }
+    else{
+	$('.en').show();
+	$('.cy').hide();
+    }
+}
 
+/** main **/
 $(document).ready(function() {
     // require(['map', 'panel', 'config'], function(map, panel, config) {
 
@@ -147,8 +160,11 @@ $(document).ready(function() {
         position: 'left'
     });
     map.addControl(sidebar);
-    $('.eng').show();
-    $('.cy').hide();
+
+    show_translated_text();
+
+    // there is a bug in leaflet-sidebar and the close button has
+    // lower z-index than map
     $(".leaflet-sidebar > .close").css('z-index',800);
     setTimeout(function () {
         sidebar.show();
