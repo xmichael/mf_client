@@ -138,5 +138,91 @@ quality of agricultural land in the area
 }
 
 
+/** legend html for both ALC2 and CSCP  */
 
-export {add_sidebar, add_intro_modal};
+    var html_legend_cscp =`
+    <div class="d-flex flex-row justify-content-center">
+       <h5>CSCP Suitability</h5>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="d-flex flex-column">
+          <div d-flex flex-row>
+            <svg width="20" height="20">
+              <circle fill="#bfbdb0" r="10" cx="10" cy="10"></circle>
+            </svg>
+            0  Unsuitable
+          </div>
+          <div>
+            <svg width="20" height="20">
+              <circle fill="#00ea0b" r="10" cx="10" cy="10"></circle>
+            </svg> 
+            1  Suitable
+          </div>
+          <div>
+            <svg width="20" height="20">
+              <circle fill="#ff9827" r="10" cx="10" cy="10"></circle>
+            </svg>
+            2  Limited suitability
+          </div>
+      </div>
+    </div>`;
+    
+    var html_legend_alc2 =`
+    <div class="d-flex flex-row justify-content-center">
+       <h5>Predictive ALC grades</h5>
+    </div>
+    <div class="d-flex flex-row">
+        <div class="d-flex flex-column">
+            <div d-flex flex-row>
+              <svg width="20" height="20">
+                <circle fill="#0182fe" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Excellent quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#c1f9ff" r="10" cx="10" cy="10"></circle>
+              </svg> 
+              Very good quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#008200" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Good quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#a7fca4" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Moderate quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#fbfa65" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Poor quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#b4875e" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Very poor quality agr. land
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#fec355" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Non-agricultural
+            </div>
+            <div>
+              <svg width="20" height="20">
+                <circle fill="#fe6256" r="10" cx="10" cy="10"></circle>
+              </svg>
+              Urban
+            </div>
+        </div>
+    </div>`;
+
+
+export {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp};

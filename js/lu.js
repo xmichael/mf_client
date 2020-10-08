@@ -71,17 +71,6 @@ $(document).ready(function() {
 	opacity: 1
     });
 
-    // // ALC2 Grades
-    // var ALC2 = L.tileLayer('data/tiles/ALC2/{z}/{x}/{y}.png', {
-    // 	minZoom: 5,
-    // 	attribution: "| © Crown copyright. Mapping derived from soils data © Cranfield University (NSRI) and for the Controller of HMSO 2020 © Crown copyright 2020, the Met Office. Contains OS data © Crown copyright and database right 2020. Contains Natural Resources Wales information © Natural Resources Wales and Database Right.",
-    // 	maxNativeZoom: 13,
-    // 	maxZoom: 20,
-    // 	opacity: 0.5
-    // });
-
-
-
     /* Dyfi Biosphere Reserver outline */
     var boundary = L.geoJSON(dataservices_boundary, {
 	minZoom: 3,
