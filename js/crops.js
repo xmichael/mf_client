@@ -1,8 +1,14 @@
 'use strict';
 
+/* sidebar with crops list in two languages */
+import {add_sidebar, add_intro_modal} from './crops_ui.js';
+
 /** global namespace */
 window.GLOBALS = {};
 /*********************/
+
+/* Show sidebar in different languages */
+//add_sidebar("sidebar");
 
 /** Get user selection for crop, scenario, year */
 function get_selection(){
@@ -44,7 +50,7 @@ function add_geotiff(_map, _url){
 	.then(response => response.arrayBuffer())
         .then(arrayBuffer => {
             parseGeoraster(arrayBuffer).then(georaster => {
-		console.log("georaster:", georaster);
+		//console.log("georaster:", georaster);
 		var layer = new GeoRasterLayer({
                     georaster: georaster,
 		    attribution: "Produced using outputs from the Welsh Government led Capability, Suitability and Climate Programme project",
@@ -109,7 +115,7 @@ $(document).ready(function() {
 	fadeAnimation: false,
 	layers: [osm]
     });
-    
+
     map.attributionControl.setPrefix('');
     
     window.GLOBALS.leaflet_map = map;
@@ -118,13 +124,14 @@ $(document).ready(function() {
     boundary.addTo(map);
 
     var opportunities_layer = add_geotiff(map,'./data/CSCP/Barley/Barley_2020-high.tif');
-    
-    /////////////////////////////
+
     spinner.show();
     setTimeout(function() {
 	spinner.hide();
     }, 1000);
 
+    add_sidebar('sidebar');
+    add_intro_modal('description_modal');
     /*********************/
     /****** LEGEND ********/
     var legend = L.control({
