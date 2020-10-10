@@ -7,9 +7,6 @@ import {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp} from '
 window.GLOBALS = {};
 /*********************/
 
-/* Show sidebar in different languages */
-//add_sidebar("sidebar");
-
 /** Get user selection for crop, scenario, year */
 function get_selection(){
     var crops = $('#crops').val();

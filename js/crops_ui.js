@@ -32,7 +32,7 @@ function gettext( text ){
 
 var html_template=`
           <fieldset id="fieldset_crops">
-	    <label for="crops">${gettext("Select a crop")}:</label>
+	    <label for="crops"><h5>${gettext("Select a crop")}:</h5></label>
 	    <select name="crops" id="crops">
 	      <option value="barley" selected>${gettext("Barley")}</option>
 	      <option value="cabbage">${gettext("Cabbage")}</option>
@@ -49,7 +49,7 @@ var html_template=`
 	    <hr/>
 	  <!-- </fieldset> -->
           <!-- <fieldset id="fieldset_scenario"> -->
-	    <p>Future greenhouse gas emissions:</p>
+	    <p><h5>Future greenhouse gas emissions:</h5></p>
 	    <input type="radio" id="low" name="scenario" value="low" checked>
 	    <label for="low">Low</label><br>
 	    <input type="radio" id="medium" name="scenario" value="medium">
@@ -59,7 +59,7 @@ var html_template=`
 	    <hr/>
 	  <!-- </fieldset> -->
 	  <!-- <fieldset id="fieldset_year"> -->
-	    <P>Year:</p>
+	    <p><h5>Year:</h5></p>
 	    <input type="radio" id="current" name="year" value="current" checked>
 	    <label for="current">2019</label><br>
 	    <input type="radio" id="2020" name="year" value="2020">
@@ -121,11 +121,11 @@ function add_intro_modal(_id) {
             <div class="modal-body">
               <p>
 Explore how the suitability of Welsh land for growing ten crops (see the dropdown list) is
-predicted to change in the future according to whether low, medium or high Greenhouse
-Gas emission scenarios come to pass
+predicted to change in the future according to whether <mark>low, medium or high Greenhouse
+Gas emission scenarios</mark> come to pass
               </p>
               <p>
-Compare with the current Predictive Agricultural Land Classification map grading the
+Compare with the current <mark>Predictive Agricultural Land Classification map grading</mark> the
 quality of agricultural land in the area
               </p>
             </div>
