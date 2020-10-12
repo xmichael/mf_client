@@ -169,12 +169,9 @@ $(document).ready(function() {
 	var div = L.DomUtil.create('div', 'info legend');
 	div.innerHTML += `
     <div class="d-flex flex-column">
-      <div class="d-flex flex-row justify-content-center"><h5>Legend</h5></div>
+      <div class="d-flex flex-row justify-content-center"><h5>Land Use</h5></div>
     <div class="d-flex flex-row">
     <div class="d-flex flex-column mr-3 border-right">
-        <div>
-          <h6 class="text-center">Land use</h6>
-        </div>
         <div>
           <svg width="20" height="20">
             <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
