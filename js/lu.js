@@ -94,6 +94,8 @@ $(document).ready(function() {
 	layers: [osmgray]
     });
 
+    map.attributionControl.setPrefix('');
+
     var basemaps = {
 	"OpenStreetMap Grayscale": osmgray,
 	"No background": white
