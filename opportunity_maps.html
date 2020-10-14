@@ -31,7 +31,7 @@
 	    <h5 class="text-muted mt-2">Constraints</h5>
 	    <hr/>
 	    <div data-toggle="tooltip" data-placement="bottom" title="Completely omit fields that were not previously arable">
-	      <input type="checkbox" id="force_historical" name="force_historical" value="1" checked>
+	      <input type="checkbox" id="force_historical" name="force_historical" value="0" checked>
 	      <label for="force_historical">Previously arable only</label><br>
 	    </div>
 	    <p/>
@@ -39,20 +39,20 @@
 	    <hr/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Historical score" when computing the weighted average'>
 	      <label for="historicalweight">Historical land use weighting</label><br>
-	      <input type="range" id="historicalweight" name="historicalweight" min="0" max="3" value="1" step="0.25" oninput="historicalweight_output.value = historicalweight.value;" >
-	      <output id="historicalweight_output" name="historicalweight_output" for="historicalweight">1</output>
+	      <input type="range" id="historicalweight" name="historicalweight" min="0" max="3" value="0.5" step="0.25" oninput="historicalweight_output.value = historicalweight.value;" >
+	      <output id="historicalweight_output" name="historicalweight_output" for="historicalweight">0.5</output>
 	    </div>
 	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Carbon score" when computing the weighted average'>
 	      <label for="carbonweight">Carbon risk weighting</label><br>
-	      <input type="range" id="carbonweight" name="carbonweight" min="0" max="3" value="1" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" >
-	      <output id="carbonweight_output" name="carbonweight_output" for="carbonweight">1</output>
+	      <input type="range" id="carbonweight" name="carbonweight" min="0" max="3" value="2.75" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" >
+	      <output id="carbonweight_output" name="carbonweight_output" for="carbonweight">2.75</output>
 	    </div>
 	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Erosion score" when computing the weighted average'>
     	      <label for="erosionweight">Erosion risk weighting</label><br>
-	      <input type="range" id="erosionweight" name="erosionweight" min="0" max="3" value="1" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
-	      <output id="erosionweight_output" name="erosionweight_output" for="erosionweight">1</output>
+	      <input type="range" id="erosionweight" name="erosionweight" min="0" max="3" value="0.5" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
+	      <output id="erosionweight_output" name="erosionweight_output" for="erosionweight">0.5</output>
 	    </div>
 	    <p>
 	    	<button type="button" id="submit" class="mt-3 btn btn-info" ><i class="fa fa-repeat"></i><span>  Recalculate</span> </button>

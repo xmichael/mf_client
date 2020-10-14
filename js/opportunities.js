@@ -162,11 +162,19 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 	    fillOpacity: '0'
 	};
 	if (d > 0){
-	    style["fillColor"] = d ==5 ? '#b30000' :
-		d ==4 ? '#e34a33' :
-		d ==3 ? '#fc8d59' :
-		d ==2 ? '#fdcc8a' :
-		'#fef0d9';
+	    // d is fractional. Round to closest integer
+	    d = Math.round(d);
+	    /* debug known high score opportunities:
+	    var fid = feature.properties.fieldid;
+	    if (fid == "1166" || fid == "7088" || fid == "8712" || fid=="2052"){
+		console.log("fieldid:", feature.properties.fieldid, "d: ",d);
+	    }*/
+	    style["fillColor"] =
+		d==5 ? '#b30000' :
+		d==4 ? '#e34a33' :
+		d==3 ? '#fc8d59' :
+		d==2 ? '#fdcc8a' :
+		d==1 ? '#fef0d9' : '#ffffff' ;
             style["fillOpacity"] = 0.7;
 	}
 	
@@ -270,6 +278,7 @@ $(document).ready(function() {
     // Map
     var map = L.map('map', {
 	center: [52.6, -3.76],
+	//center: [52.4380,-4.0318],
 	zoom: 13,
 	minZoom: 10,
 	maxZoom: 18,
@@ -285,13 +294,16 @@ $(document).ready(function() {
     window.GLOBALS.leaflet_map = map;
     window.GLOBALS.info = add_info(map);
 
+    /* Popup introduction when visiting page */
     add_intro_modal('description_modal');
 
-    $('#historicalweight').val(1);
-    $('#carbonweight').val(1);
-    $('#erosionweight').val(1);
+    /* default values are set here (and not really in the HTML val attribute ) */
+    $('#historicalweight').val(0.5);
+    $('#carbonweight').val(2.75);
+    $('#erosionweight').val(0.5);
     //note: "checked" DOM property is value, but "checked" HTML attribute is default value
-    document.getElementById("force_historical").checked = true;
+    //document.getElementById("force_historical").checked = true;
+    document.getElementById("force_historical").checked = false;
 
     op_constraints_refresh();
     
