@@ -21,20 +21,12 @@
 </head>
 
 <body>
-  <div id="description_modal" class="modal fade" tabindex="-1" role="dialog">
-  </div>
   <div class="container-fluid h-100">
     <div class="row h-100">
       <div class="col-sm-3 d-none d-sm-block">
         <div id="sidebar">
           <fieldset id="op_constraints">
-	    <h5 class="text-muted mt-2">Constraints</h5>
-	    <hr/>
-	    <div data-toggle="tooltip" data-placement="bottom" title="Completely omit fields that were not previously arable">
-	      <input type="checkbox" id="force_historical" name="force_historical" value="0" checked>
-	      <label for="force_historical">Previously arable only</label><br>
-	    </div>
-	    <p/>
+	    <input class="d-none" type="checkbox" id="force_historical" name="force_historical" value="0" checked>
 	    <h5 class="text-muted">Risk weighting</h5>
 	    <hr/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This value is multiplied to the "Historical score" when computing the weighted average'>
@@ -54,8 +46,10 @@
 	      <input type="range" id="erosionweight" name="erosionweight" min="0" max="3" value="0.5" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
 	      <output id="erosionweight_output" name="erosionweight_output" for="erosionweight">0.5</output>
 	    </div>
-	    <p>
-	    	<button type="button" id="submit" class="mt-3 btn btn-info" ><i class="fa fa-repeat"></i><span>  Recalculate</span> </button>
+	    <p/>
+	      <button type="button" id="submit" class="mt-3 btn btn-info" ><i class="fa fa-repeat"></i><span>  Recalculate</span> </button>
+	    <hr/>
+	    <div id="help"></div>
           </fieldset>
         </div>
       </div>
@@ -85,7 +79,7 @@
   <!-- Static GeoJSON files. Good for caching/compression etc. -->
   <script src="data/dyfi_boundary.js" type="text/javascript"></script>
 
-  <script type="module" src="js/opportunities.js"></script>
+  <script type="module" src="js/opportunities_simple.js"></script>
 </body>
 
 </html>

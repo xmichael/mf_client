@@ -14,52 +14,24 @@ function add_intro_modal(_id) {
     var html = "";
     if (window.location.search=="?lang=cy"){
 	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Mapiau Cyfle</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
               <p>Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
 		 nodi caeau sy&#39;n addas ar gyfer adfer gweithgaredd amaethyddol hanesyddol. Gan
 		 ddefnyddio data storio carbon posib, tueddiad i ddata erydiad a gwybodaeth am ddefnydd
 		 hanesyddol o&#39;r cae, gall defnyddwyr amrywio&#39;r pwysiadau a gymhwysir i weld yr effaith
 		 y mae caeau&#39;n cael eu nodi fel cyfleoedd mwy neu lai.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
     `;
     }
     else{
 	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Opportunity Maps</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
               <p>Explore the data using this simple decision support
 		 tool to help identify fields suitable for the restoration of
 		 historical agricultural activity. Using potential Carbon storage data,
 		 susceptibility to erosion data and information on historical use of
 		 the field, users can vary the weightings applied to see the effect on
 		 which fields are identified as greater or lesser opportunities.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
     `;
     }
-    $('#' + _id).html(html).modal();
+    $('#' + _id).html(html);
 }
 
 
@@ -295,7 +267,7 @@ $(document).ready(function() {
     window.GLOBALS.info = add_info(map);
 
     /* Popup introduction when visiting page */
-    add_intro_modal('description_modal');
+    add_intro_modal('help');
 
     /* default values are set here (and not really in the HTML val attribute ) */
     $('#historicalweight').val(0.5);
