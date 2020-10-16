@@ -1,7 +1,105 @@
 'use strict';
 
-/* global require */
+/** globals */
+const CSVURL;
 
+// Dynamically updated GeoJSON layer
+var missing = {};
+
+var colourmap = {
+    "Arable" : "#be9b6c",
+    "Pasture" : "#fefb69",
+    "Meadow" : "#17d41a",
+    "Woodland" : "#018100",
+    "Settlement" : "#e21ddc",
+    "Water" : "#327eef",
+    "Common land": "#FF0000",
+    "Upland": "#FF0000",
+    "Other": "#FF0000"
+};
+
+function create_filtered_geojson(_lu_map, _gj_map) {
+    var featurecollection = {
+	"type": "FeatureCollection",
+	"name": "1840s_undocumented",
+	"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+	"features": []
+    };
+
+    for (var k in _lu_map){
+	if ( k in _gj_map ){
+	    var feature = {};
+	    feature = {
+		"type": "Feature",
+		"properties": { "rowid": k, "landuse": _lu_map[k], "colour": colourmap[_lu_map[k]] },
+		"geometry": { "type": "Polygon", "coordinates": _gj_map[k] }
+	    };
+	    featurecollection.features.push(feature);
+	}
+    }
+
+    return featurecollection;
+}
+
+
+/* Create a fast hash/lookup table from geojson to map rowid to geometry */
+function geojson_map(gj){
+    var gj_map = {};
+    for (var f of gj.features){
+	gj_map[f.properties.rowid] = f.geometry.coordinates;
+    }
+    return gj_map;
+}
+
+/* Create a geojson layer from the google forms CSV export */
+function add_csv(_map, _url, _gj_map){
+
+    //add new _url
+    fetch(_url)
+        .then(response => response.text())
+        .then(csv => {
+
+            var res = Papa.parse(csv,{
+		delimiter: ',',
+		header: true
+	    });
+	    
+	    var lu_map = {};
+	    
+	    for (var row of res.data) {
+		if (row["Field ID"].length != 0){
+		    lu_map[row["Field ID"]] = row["Land use"];
+		}
+	    }
+
+	    var filtered_geojson = create_filtered_geojson ( lu_map, _gj_map );
+	    console.log(filtered_geojson);
+	    //clear map
+	    _map.removeLayer(missing);
+	    //recreate
+	    missing = L.geoJSON(filtered_geojson, {
+		minZoom: 3,
+		maxZoom: 18,
+		style: function (feature){
+		    return {
+			"color": "#FF0000",
+			"stroke": true,
+			"fillColor": feature.properties.colour,
+			"weight": 5,
+			"opacity": 1
+		    };
+		}
+	    });
+	    missing.addTo(_map);
+	    // missing should be on top
+	    _map.on("overlayadd", function(event) {
+		missing.bringToFront();
+	    });
+	    //_map.fitBounds(missing.getBounds());
+        });
+}
+
+/* DOM ready */
 $(document).ready(function() {
     // require(['map', 'panel', 'config'], function(map, panel, config) {
 
@@ -27,26 +125,23 @@ $(document).ready(function() {
 	maxZoom: 17
     });
 
-    // Overlay layers
-
-    // Overlay layers (TMS)
-
-    // Contemporary FBs
-
-    var landuse_now =L.tileLayer('data/tiles/2019_land_use/{z}/{x}/{y}.png', {
-	opacity: 1,
-	minZoom: 10,
-	maxNativeZoom: 14,
-	maxZoom: 18
-    });
-
-    // 1840s land use tiles
-    var landuse_1840s = L.tileLayer('data/tiles/1840s_LU_repair/{z}/{x}/{y}.png', {
+    // 1840s land use tiles (documented only - w/o keyword based classification)
+    var landuse_1840s_documented_only = L.tileLayer('data/tiles/1840s_LU_documented_only/{z}/{x}/{y}.png', {
 	minZoom: 12,
 	maxNativeZoom: 16,
 	maxZoom: 18,
 	opacity: 1
     });
+
+    // 1840s land use missing tiles (used for quick rendering before overlaying CSV colors)
+    var missing_tiles = L.tileLayer('data/tiles/1840s_LU_missing/{z}/{x}/{y}.png', {
+	minZoom: 12,
+	maxNativeZoom: 16,
+	maxZoom: 18,
+	opacity: 1
+    });
+
+    var geometry_map = geojson_map(landuse_1840s_missing);
 
     /* Dyfi Biosphere Reserver outline */
     var boundary = L.geoJSON(dataservices_boundary, {
@@ -63,7 +158,7 @@ $(document).ready(function() {
 
     // Map
     var map = L.map('map', {
-	center: [52.47, -4.055],
+	center: [52.48, -4.040],
 	zoom: 14,
 	minZoom: 9,
 	maxZoom: 18,
@@ -79,30 +174,24 @@ $(document).ready(function() {
     };
 
     var extramaps = {
-	"Land Use <span class='text-info'>(1840s)</span>": landuse_1840s
+	"Land Use 1840s <span class='text-info'>(documented)</span>": landuse_1840s_documented_only,
+	"missing information": missing_tiles
     };
 
-
+    add_csv(map, 'CSVURL', geometry_map);
+    
     // Add base layers
     L.control.layers({}, extramaps, {
 	collapsed: false
     }).addTo(map);
-
-    // landuse_1840s should be on top
-
-    map.on("overlayadd", function(event) {
-	landuse_1840s.bringToFront();
-    });
 
     /*********************/
 
 
     /* sequence matters for click events on map (lastest grabs clicks) */
     boundary.addTo(map);
-    landuse_1840s.addTo(map);
-    //ds.addTo(map);
-    //landuse_now.addTo(map);
-    //ALC2.addTo(map);
+    //landuse_1840s_documented_only.addTo(map);
+    missing_tiles.addTo(map);
 
 
     spinner.show();
@@ -112,6 +201,10 @@ $(document).ready(function() {
 
     //spinner.hide();
 
+
+    setInterval(function() {
+	add_csv(map, 'CSVURL', geometry_map);
+    }, 20000);
     /*********************/
     /****** LEGEND ********/
     var legend = L.control({
@@ -122,12 +215,9 @@ $(document).ready(function() {
 	var div = L.DomUtil.create('div', 'info legend');
 	div.innerHTML += `
     <div class="d-flex flex-column">
-      <div class="d-flex flex-row justify-content-center"><h5>Legend</h5></div>
+      <div class="d-flex flex-row justify-content-center"><h5>Land Use</h5></div>
     <div class="d-flex flex-row">
     <div class="d-flex flex-column mr-3 border-right">
-        <div>
-          <h6 class="text-center">Land use</h6>
-        </div>
         <div>
           <svg width="20" height="20">
             <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
