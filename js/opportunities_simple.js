@@ -141,7 +141,7 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 		console.log("fieldid:", feature.properties.fieldid, "d: ",d);
 	    }*/
 	    style["fillColor"] =
-		d==5 ? '#b30000' :
+		d>=5 ? '#b30000' :
 		d==4 ? '#e34a33' :
 		d==3 ? '#fc8d59' :
 		d==2 ? '#fdcc8a' :
