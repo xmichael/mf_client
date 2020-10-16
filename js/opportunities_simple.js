@@ -14,7 +14,7 @@ function add_intro_modal(_id) {
     var html = "";
     if (window.location.search=="?lang=cy"){
 	html = `
-              <p>Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
+              <p class="small" >Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
 		 nodi caeau sy&#39;n addas ar gyfer adfer gweithgaredd amaethyddol hanesyddol. Gan
 		 ddefnyddio data storio carbon posib, tueddiad i ddata erydiad a gwybodaeth am ddefnydd
 		 hanesyddol o&#39;r cae, gall defnyddwyr amrywio&#39;r pwysiadau a gymhwysir i weld yr effaith
@@ -23,12 +23,12 @@ function add_intro_modal(_id) {
     }
     else{
 	html = `
-              <p>Explore the data using this simple decision support
-		 tool to help identify fields suitable for the restoration of
+              <p class="small" >Explore the data using this simple <b>decision support
+		 tool</b> to help identify fields suitable for the restoration of
 		 historical agricultural activity. Using potential Carbon storage data,
 		 susceptibility to erosion data and information on historical use of
-		 the field, users can vary the weightings applied to see the effect on
-		 which fields are identified as greater or lesser opportunities.</p>
+		 the field, users can <b>vary the weightings applied to see the effect on
+		 which fields are identified as greater or lesser opportunities</b>.</p>
     `;
     }
     $('#' + _id).html(html);
@@ -38,25 +38,23 @@ function add_intro_modal(_id) {
 function set_spinner(timeout){
     var spinner = $('.spinner');
     spinner.show();
+    document.body.style.cursor = 'wait';    
     setTimeout(function() {
 	spinner.hide();
+	document.body.style.cursor = 'default';
     }, timeout);
 
 }
 
 function calculate_opportunity_score_algorithm(_carbonscore, _erosionscore, _historical, _constraints){
-    /* If any of carbon/erosion score is 0 then return 0 (not enforced in the interactive version!)
-      if ( _carbonscore * _erosionscore == 0 ){
-      return 0;
-      }
-    */
     if (_constraints.force_historical && (_historical == 0)){
 	//console.log(`force_historical=${_constraints.force_historical} historical=${_historical}  `);
 	return 0;
     }
     
     var score_nom = _constraints.carbonweight*_carbonscore + _constraints.erosionweight*_erosionscore + _constraints.historicalweight*_historical;
-    var score_denom = _constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight;
+    //var score_denom = _constraints.carbonweight + _constraints.erosionweight + _constraints.historicalweight;
+    var score_denom = 3;
     var score = score_nom / score_denom;
     //console.log(`score=${score} nom=${score_nom} denom=${score_denom}  `);
     //console.log(`${_constraints.carbonweight}*${_carbonscore} + ${_constraints.erosionweight} * ${_erosionscore} + ${_constraints.historicalweight} * ${_historical} ) / (${_constraints.carbonweight} + ${_constraints.erosionweight} + ${_constraints.historicalweight}`);
@@ -100,7 +98,8 @@ function create_html_popup( feature ){
 
     var score = calculate_opportunity_score(props);
     var _constraints = window.GLOBALS.op_constraints;
-    var score_debug = `${score} = ( ${_constraints.carbonweight}*${props.carbon_score} + ${_constraints.erosionweight} * ${props.erosion_score} + ${_constraints.historicalweight} * ${props.historical_score} ) / (${_constraints.carbonweight} + ${_constraints.erosionweight} + ${_constraints.historicalweight})`;
+    //var score_debug = `${score} = ( ${_constraints.carbonweight}*${props.carbon_score} + ${_constraints.erosionweight} * ${props.erosion_score} + ${_constraints.historicalweight} * ${props.historical_score} ) / (${_constraints.carbonweight} + ${_constraints.erosionweight} + ${_constraints.historicalweight})`;
+    var score_debug = `${score} = ( ${_constraints.carbonweight}*${props.carbon_score} + ${_constraints.erosionweight} * ${props.erosion_score} + ${_constraints.historicalweight} * ${props.historical_score} ) / 3`;
     return `
   <div>
       <b>ogc_fid</b>: ${props["ogc_fid"]}<br/>
@@ -187,16 +186,20 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 }
 
 /* Initialize window.GLOBALS.op_constraints from the input values on the sidebar controls */
-async function op_constraints_refresh(){
-    var historicalweight = parseFloat(document.getElementById("historicalweight_output").value);
-    var carbonweight = parseFloat(document.getElementById("carbonweight_output").value);
-    var erosionweight = parseFloat(document.getElementById("erosionweight_output").value);
+function op_constraints_refresh(){
+    var historicalweight = parseFloat(document.getElementById("historicalweight").value);
+    var carbonweight = parseFloat(document.getElementById("carbonweight").value);
+    var erosionweight = parseFloat(document.getElementById("erosionweight").value);
     var force_historical = document.getElementById("force_historical").checked;
 
+    /* NOTE: we use the 0.5 / 2.75 / 0.5 calibration that we came up with using known examples 
+       -- In the dumbed down version we should get this calibration values when all sliders are in the middle (value 1) so that the users
+       don't get "confused" by the weighting algorithm.
+     */
     window.GLOBALS.op_constraints={
-	"historicalweight" : historicalweight,
-	"carbonweight" : carbonweight,
-	"erosionweight" : erosionweight,
+	"historicalweight" : 0.5 * historicalweight,
+	"carbonweight" : 2.75 * carbonweight,
+	"erosionweight" : 0.5 * erosionweight,
 	"force_historical" : force_historical
     };
 
@@ -270,9 +273,9 @@ $(document).ready(function() {
     add_intro_modal('help');
 
     /* default values are set here (and not really in the HTML val attribute ) */
-    $('#historicalweight').val(0.5);
-    $('#carbonweight').val(2.75);
-    $('#erosionweight').val(0.5);
+    $('#historicalweight').val(1);
+    $('#carbonweight').val(1);
+    $('#erosionweight').val(1);
     //note: "checked" DOM property is value, but "checked" HTML attribute is default value
     //document.getElementById("force_historical").checked = true;
     document.getElementById("force_historical").checked = false;
