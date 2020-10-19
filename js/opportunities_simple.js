@@ -25,7 +25,7 @@ function add_intro_modal(_id) {
 	html = `
               <p class="small" >Explore the data using this simple <b>decision support
 		 tool</b> to help identify fields suitable for the restoration of
-		 historical agricultural activity. Using potential Carbon storage data,
+		 historical agricultural activity. Using potential carbon storage data,
 		 susceptibility to erosion data and information on historical use of
 		 the field, users can <b>vary the weightings applied to see the effect on
 		 which fields are identified as greater or lesser opportunities</b>.</p>
