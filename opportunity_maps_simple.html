@@ -33,19 +33,25 @@
 	    <hr/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This slider will decrease/boost the "Historical score"'>
 	      <label for="historicalweight">Historical land use weighting</label><br>
-	      <input type="range" id="historicalweight" name="historicalweight" min="0" max="2" value="1" step="0.25" oninput="historicalweight_output.value = historicalweight.value;" >
+	      <div class="d-inline-flex">
+		<i class="fa fa-minus"></i><input type="range" id="historicalweight" name="historicalweight" min="0" max="2" value="1" step="0.25" oninput="historicalweight_output.value = historicalweight.value;" ><i class="fa fa-plus"></i>
+	      </div>
 	      <!-- <output id="historicalweight_output" name="historicalweight_output" for="historicalweight">1</output> -->
 	    </div>
 	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This slider will decrease/boost "Carbon score"'>
 	      <label for="carbonweight">Carbon risk weighting</label><br>
-	      <input type="range" id="carbonweight" name="carbonweight" min="0" max="2" value="1" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" >
-	      <!-- <output id="carbonweight_output" name="carbonweight_output" for="carbonweight">1</output> -->
+	      <div class="d-inline-flex">
+		<i class="fa fa-minus"></i><input type="range" id="carbonweight" name="carbonweight" min="0" max="2" value="1" step="0.25" oninput="carbonweight_output.value = carbonweight.value;" ><i class="fa fa-plus"></i>
+	      </div>
+	    <!-- <output id="carbonweight_output" name="carbonweight_output" for="carbonweight">1</output> -->
 	    </div>
 	    <p/>
 	    <div data-toggle="tooltip" data-placement="bottom" title='This slider will decrease/boost "Erosion score"'>
     	      <label for="erosionweight">Erosion risk weighting</label><br>
-	      <input type="range" id="erosionweight" name="erosionweight" min="0" max="2" value="1" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" >
+	      <div class="d-inline-flex">
+		<i class="fa fa-minus"></i><input type="range" id="erosionweight" name="erosionweight" min="0" max="2" value="1" step="0.25" oninput="erosionweight_output.value = erosionweight.value;" ><i class="fa fa-plus"></i>
+	      </div>
 	      <!-- <output id="erosionweight_output" name="erosionweight_output" for="erosionweight">1</output> -->
 	    </div>
 	    <p/>
