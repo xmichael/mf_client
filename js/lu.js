@@ -205,6 +205,11 @@ $(document).ready(function() {
             <circle fill="#327eef" r="10" cx="10" cy="10"></circle>
           </svg> Water
         </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#53ccbc" r="10" cx="10" cy="10"></circle>
+          </svg> Upland
+        </div>
       </div>
 </div></div>
     `;
