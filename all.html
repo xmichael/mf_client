@@ -43,19 +43,34 @@
       <div class="tabs">
 	<ul class="nav nav-pills my-1 justify-content-around">
 	  <li class="nav-item">
-            <a class="nav-link active" id='tab-landuse' data-toggle="pill" href="#land_use">Land Use comparison</a>
+            <a class="nav-link active" id='tab-landuse' data-toggle="pill" href="#land_use">
+	      <span class="lang_en">Land Use comparison</span>
+	      <span class="lang_cy">Cymhariaeth Defnydd Tir</span>
+	    </a>
 	  </li>
 	  <li class="nav-item">
-            <a class="nav-link" id='tab-histories' data-toggle="pill" href="#oral_histories">Oral Histories</a>
+            <a class="nav-link" id='tab-histories' data-toggle="pill" href="#oral_histories">
+	      <span class="lang_en">Oral Histories</span>
+	      <span class="lang_cy">Hanesion Llafar</span>
+	    </a>
 	  </li>
 	  <li class="nav-item">
-            <a class="nav-link" id='tab-opportunity' data-toggle="pill" href="#crops">Crops</a>
+            <a class="nav-link" id='tab-crops' data-toggle="pill" href="#crops">
+	      <span class="lang_en">Crops</span>
+	      <span class="lang_cy">Cnydau</span>
+	    </a>
 	  </li>
 	  <li class="nav-item">
-            <a class="nav-link" id='tab-opportunity' data-toggle="pill" href="#opportunity_maps">Opportunity Maps</a>
+            <a class="nav-link" id='tab-opportunity' data-toggle="pill" href="#opportunity_maps">
+	      <span class="lang_en">Opportunity Maps</span>
+	      <span class="lang_cy">Mapiau Cyfleon</span>
+	    </a>
 	  </li>
 	  <li class="nav-item">
-            <a class="nav-link" id='tab-opportunity' data-toggle="pill" href="#food">Producers & Distributors</a>
+            <a class="nav-link" id='tab-food' data-toggle="pill" href="#food">
+	      <span class="lang_en">Producers & Distributors</span>
+	      <span class="lang_cy">Cynhyrchwyr a Dosbarthwyr</span>
+	    </a>
 	  </li>
 	</ul>
       </div>
@@ -84,6 +99,11 @@
 	  for ( const i of document.getElementsByTagName("iframe")) {
 	      i.src += window.location.search;
 	  }
+      }
+      /* hide elements with class different than ?lang=?? */
+      var divs_en  = window.location.search=="?lang=cy"? document.querySelectorAll('.lang_en') : document.querySelectorAll('.lang_cy') ;
+      for (const div of divs_en) {
+	  div.style.display = 'none';
       }
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
