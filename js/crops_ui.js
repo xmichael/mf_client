@@ -1,5 +1,6 @@
-/* dictionary of words */
+/* dictionary of words or short phrases */
 var en2cy = {
+    "Crops":"Cnydau",
     "Select a crop":"Dewiswch gnwd",
     "Barley":"Haidd",
     "Cabbage":"Bresych",
@@ -11,8 +12,49 @@ var en2cy = {
     "Rye":"Rhyg",
     "Wheat":"Gwenith",
     "Willow commercial":"Helyg masnachol",
-    "Willow environmental":"Helyg amgylcheddol"	
+    "Willow environmental":"Helyg amgylcheddol"	,
+    "Future greenhouse gas emissions":"Allyriadau nwyon tŷ gwydr yn y dyfodol",
+    "Low":"Isel",
+    "Medium":"Canolig",
+    "High":"Uchel",
+    "Year":"Blwyddyn",
+    "Suitability":"Addasrwydd",
+    "Unsuitable":"Anaddas",
+    "Suitable":"Addas",
+    "Limited suitability":"Addasrwydd cyfyngedig",
+    "Predictive ALC map":"Map ALC rhagfynegol",
+    "Contemporary":"Cyfoes"
 };
+
+/* dictionary of snippets of text */
+var transtext = {
+    "intro_html" : [ `Explore how the suitability of Welsh land for growing ten crops (see
+the dropdown list) is predicted to change in the future according to
+whether <mark>low, medium or high Greenhouse Gas emission
+scenarios</mark> come to pass <p/> Compare with the current
+<mark>Predictive Agricultural Land Classification map grading</mark>
+the quality of agricultural land in the area` ,
+		     `Archwiliwch sut y rhagwelir y bydd addasrwydd tir Cymru ar gyfer tyfu
+deg cnwd (gweler y rhestr sydd yn disgyn) yn newid yn y dyfodol yn ôl
+a fydd sefyllfa allyriadau Nwyon Tŷ Gwydr isel, canolig neu uchel yn
+dod i ben <p/> Cymharwch â&#39;r map Dosbarthiad Tir Amaethyddol
+Rhagfynegol cyfredol sy&#39;n graddio ansawdd tir amaethyddol yn yr
+ardal
+`]
+};
+
+/* same as gettext but for long snippets */
+function get_transtext (prop){
+    if (! transtext.hasOwnProperty(prop)){
+	console.log("!!!!No such translation: ",prop); 
+	return "";
+    }
+    if (window.location.search=="?lang=cy"){
+	return transtext[prop][1];
+    }
+    return transtext[prop][0];
+}
+
 
 /* will return the submitted English text in right language
 *  according to lang=XX parameter and the dictionary of supplied
@@ -49,17 +91,17 @@ var html_template=`
 	    <hr/>
 	  <!-- </fieldset> -->
           <!-- <fieldset id="fieldset_scenario"> -->
-	    <p><h5>Future greenhouse gas emissions:</h5></p>
+	    <p><h5>${gettext("Future greenhouse gas emissions")}:</h5></p>
 	    <input type="radio" id="low" name="scenario" value="low" checked>
-	    <label for="low">Low</label><br>
+	    <label for="low">${gettext("Low")}</label><br>
 	    <input type="radio" id="medium" name="scenario" value="medium">
-	    <label for="medium">Medium</label><br>
+	    <label for="medium">${gettext("Medium")}</label><br>
 	    <input type="radio" id="high" name="scenario" value="high">
-	    <label for="high">High</label>
+	    <label for="high">${gettext("High")}</label>
 	    <hr/>
 	  <!-- </fieldset> -->
 	  <!-- <fieldset id="fieldset_year"> -->
-	    <p><h5>Year:</h5></p>
+	    <p><h5>${gettext("Year")}:</h5></p>
 	    <input type="radio" id="current" name="year" value="current" checked>
 	    <label for="current">2019</label><br>
 	    <input type="radio" id="2020" name="year" value="2020">
@@ -79,61 +121,24 @@ function add_sidebar(id) {
 
 /* Show introductory modal dialogy in different languages */
 function add_intro_modal(_id) {
-    var html = "";
-    if (window.location.search=="?lang=cy"){
-	html = `
+    const html = `
       <!-- modal-{sm,lg,xl} -->
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Cnydau</h5>
+              <h5 class="modal-title">${gettext("Crops")}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>
-                Archwiliwch sut y rhagwelir y bydd addasrwydd tir Cymru ar gyfer tyfu deg cnwd
-                (gweler y rhestr sydd yn disgyn) yn newid yn y dyfodol yn ôl a fydd sefyllfa allyriadau
-                Nwyon Tŷ Gwydr isel, canolig neu uchel yn dod i ben
-              </p>
-              <p>
-                Cymharwch â&#39;r map Dosbarthiad Tir Amaethyddol Rhagfynegol cyfredol sy&#39;n graddio
-                ansawdd tir amaethyddol yn yr ardal
-              </p>
+              ${get_transtext("intro_html")}
             </div>
           </div>
        </div>
       </div> <!-- modal-dialog -->
     `;
-    }
-    else{
-	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Crops</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>
-Explore how the suitability of Welsh land for growing ten crops (see the dropdown list) is
-predicted to change in the future according to whether <mark>low, medium or high Greenhouse
-Gas emission scenarios</mark> come to pass
-              </p>
-              <p>
-Compare with the current <mark>Predictive Agricultural Land Classification map grading</mark> the
-quality of agricultural land in the area
-              </p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
-    `;
-    }
+
     $('#' + _id).html(html).modal();
 }
 
@@ -142,7 +147,7 @@ quality of agricultural land in the area
 
     var html_legend_cscp =`
     <div class="d-flex flex-row justify-content-center">
-       <h5>CSCP Suitability</h5>
+       <h5>${gettext("Suitability")}</h5>
     </div>
     <div class="d-flex flex-row">
       <div class="d-flex flex-column">
@@ -150,19 +155,19 @@ quality of agricultural land in the area
             <svg width="20" height="20">
               <circle fill="#bfbdb0" r="10" cx="10" cy="10"></circle>
             </svg>
-            0  Unsuitable
+            0  ${gettext("Unsuitable")}
           </div>
           <div>
             <svg width="20" height="20">
               <circle fill="#00ea0b" r="10" cx="10" cy="10"></circle>
             </svg> 
-            1  Suitable
+            1  ${gettext("Suitable")}
           </div>
           <div>
             <svg width="20" height="20">
               <circle fill="#ff9827" r="10" cx="10" cy="10"></circle>
             </svg>
-            2  Limited suitability
+            2  ${gettext("Limited suitability")}
           </div>
       </div>
     </div>`;
@@ -225,4 +230,4 @@ quality of agricultural land in the area
     </div>`;
 
 
-export {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp};
+export {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp, gettext};

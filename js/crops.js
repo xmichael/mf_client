@@ -1,7 +1,7 @@
 'use strict';
 
 /* sidebar with crops list in two languages */
-import {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp} from './crops_ui.js';
+import {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp, gettext} from './crops_ui.js';
 
 /** global namespace */
 window.GLOBALS = {};
@@ -127,7 +127,9 @@ $(document).ready(function() {
     window.GLOBALS.leaflet_map = map;
 
     // Add overlays (no base maps)
-    L.control.layers({}, {"Predictive ALC map v.2 <span class='text-info'>(Contemporary)</span>": ALC2}, {
+    var overlays = {};
+    overlays[`${gettext("Predictive ALC map")} v.2 <span class='text-info'>(${gettext("Contemporary")})</span>`] = ALC2;
+    L.control.layers({}, overlays, {
         collapsed: false
     }).addTo(map);
 
@@ -178,7 +180,7 @@ $(document).ready(function() {
 
     //switch legend when adding ALC2 overlay
     map.on('overlayadd', function(l){
-	if (l.name.startsWith('Predictive')){
+	if (l.name.startsWith('Predictive') || l.name.startsWith('Map ALC')){
 	    $('#crops_legend').html(html_legend_alc2);
 	}
     });
