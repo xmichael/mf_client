@@ -1,7 +1,8 @@
 'use strict';
 
 /* sidebar with crops list in two languages */
-import {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp, gettext} from './crops_ui.js';
+import {add_sidebar, add_intro_modal, html_legend_alc2, html_legend_cscp} from './crops_ui.js';
+import {gettext} from './mf_i18n.js';
 
 /** global namespace */
 window.GLOBALS = {};
