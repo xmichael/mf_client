@@ -9,8 +9,7 @@ var descriptions = {
 	var description = props["Description"];
 	var keywords = props["Keywords"].join();
 	var date = props["Date of Recording"];
-	var pics = props["Pictures"].length>0 ? props["Pictures"]:
-            ["No image available"];
+	var pics = props["Pictures"];
 	/** Assumes paths are ./base/pictures[0].jpg */
 
 	/* create carousel html for all pictures */
