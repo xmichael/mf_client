@@ -1,3 +1,21 @@
+/* Change visibility of all elements that have a class "lang_en" or "lang_cy"
+* choose this method when you want to have everything (both languages) in one html page for convenience instead of JSON objects
+* this method can obviously only be used after DOM is ready and everything is rendered
+* -- s.a.: gettext for short text or get_transtext for paragraphs using js-object based dictonary
+*/
+function flip_l10n(){
+    if (window.location.search=="?lang=cy"){
+	$('.lang_cy').show();
+	$('.lang_en').hide();
+    }
+    else{
+	$('.lang_en').show();
+	$('.lang_cy').hide();
+    }
+}
+
+
+
 /* dictionary of words or short phrases */
 var en2cy = {
     "Crops":"Cnydau",
@@ -28,7 +46,7 @@ var en2cy = {
 
 /* dictionary of snippets of text */
 var transtext = {
-    "intro_html" : [ `Explore how the suitability of Welsh land for growing ten crops (see
+    "crops_intro_html" : [ `Explore how the suitability of Welsh land for growing ten crops (see
 the dropdown list) is predicted to change in the future according to
 whether <mark>low, medium or high Greenhouse Gas emission
 scenarios</mark> come to pass <p/> Compare with the current
@@ -40,7 +58,19 @@ a fydd sefyllfa allyriadau Nwyon Tŷ Gwydr isel, canolig neu uchel yn
 dod i ben <p/> Cymharwch â&#39;r map Dosbarthiad Tir Amaethyddol
 Rhagfynegol cyfredol sy&#39;n graddio ansawdd tir amaethyddol yn yr
 ardal
-`]
+`],
+    "lu_land_use" : [ "Land use", "Defnydd Tir" ],
+    "lu_1840s" : [ "1840s", "1840au" ],
+    "lu_1930s" : [ "1930s", "1930au" ],
+    "lu_contemporary" : ["Contemporary", "Cyfredol"],
+    "lu_arable" : ["Arable","Tir âr"],
+    "lu_pasture" : ["Pasture","Porfa"],
+    "lu_meadow" : ["Meadow","Dôl"],
+    "lu_woodland" : ["Woodland","Coetir"],
+    "lu_settlement" : ["Settlement","Aneddiad"],
+    "lu_water" : ["Water","Dŵr"],
+    "lu_common" : ["Common","Comin"],
+    "lu_upland" : ["Upland","Ucheldir"]
 };
 
 /* same as gettext but for long snippets */
@@ -72,4 +102,4 @@ function gettext( text ){
     return text;
 }
 
-export {gettext, get_transtext};
+export {gettext, get_transtext, flip_l10n};

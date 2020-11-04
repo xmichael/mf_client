@@ -1,18 +1,8 @@
 'use strict';
 
-/* Change visibility of all elements that have a class "en" or "cy"
- * depending on "lang" parameter 
- */
-function show_translated_text(){
-    if (window.location.search=="?lang=cy"){
-	$('.cy').show();
-	$('.en').hide();
-    }
-    else{
-	$('.en').show();
-	$('.cy').hide();
-    }
-}
+/* sidebar with crops list in two languages */
+import {html_legend_lu} from './lu_ui.js';
+import {get_transtext, flip_l10n} from './mf_i18n.js';
 
 /** main **/
 $(document).ready(function() {
@@ -104,18 +94,12 @@ $(document).ready(function() {
 
 
     /******** LOAD OVERLAYS ******/
-    /*  var Boundary = $.ajax({url:"/data/boundary.geojson", dataType: "json",
-	success: console.log("County data successfully loaded."),
-	error: function (xhr) {
-        alert(xhr.statusText)
-	}}) */
 
-    var extramaps = {
-	"Land Use <span class='text-info'>(1840s)</span>": landuse_1840s,
-	"Land Use <span class='text-info'>(Dudley Stamp 1930s)</span>": ds,
-	"Land Use <span class='text-info'>(Contemporary)</span>": landuse_now
-    };
-
+    // Add overlays (no base maps)
+    var extramaps = {};
+    extramaps[`${get_transtext("lu_land_use")} <span class='text-info'>(${get_transtext("lu_1840s")})</span>`] = landuse_1840s;
+    extramaps[`${get_transtext("lu_land_use")} <span class='text-info'>(Dudley Stamp ${get_transtext("lu_1930s")})</span>`] = ds;
+    extramaps[`${get_transtext("lu_land_use")} <span class='text-info'>(${get_transtext("lu_contemporary")})</span>`] = landuse_now;
 
     // Add base layers
     L.control.layers({}, extramaps, {
@@ -152,15 +136,14 @@ $(document).ready(function() {
     });
     map.addControl(sidebar);
 
-    show_translated_text();
-
     // there is a bug in leaflet-sidebar and the close button has
     // lower z-index than map
     $(".leaflet-sidebar > .close").css('z-index',800);
     setTimeout(function () {
         sidebar.show();
     }, 500);
-    
+
+    flip_l10n();
     /*********************/
     /****** LEGEND ********/
     var legend = L.control({
@@ -170,53 +153,8 @@ $(document).ready(function() {
     legend.onAdd = function(map) {
 	var div = L.DomUtil.create('div', 'info legend');
 	div.innerHTML += `
-    <div class="d-flex flex-column">
-      <div class="d-flex flex-row justify-content-center"><h5>Land Use</h5></div>
-    <div class="d-flex flex-row">
-    <div class="d-flex flex-column mr-3 border-right">
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#be9b6c" r="10" cx="10" cy="10"></circle>
-          </svg>
-          Arable
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#fefb69" r="10" cx="10" cy="10"></circle>
-          </svg> Pasture
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#17d41a" r="10" cx="10" cy="10"></circle>
-          </svg> Meadow
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#018100" r="10" cx="10" cy="10"></circle>
-          </svg> Woodland
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#e21ddc" r="10" cx="10" cy="10"></circle>
-          </svg> Settlement
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#327eef" r="10" cx="10" cy="10"></circle>
-          </svg> Water
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#2ece76" r="10" cx="10" cy="10"></circle>
-          </svg> Common
-        </div>
-        <div>
-          <svg width="20" height="20">
-            <circle fill="#53ccbc" r="10" cx="10" cy="10"></circle>
-          </svg> Upland
-        </div>
-      </div>
-</div></div>
+    <div id="lu_legend" class="d-flex flex-column">
+    </div>
     `;
 	var draggable = new L.Draggable(div);
 	draggable.enable();
@@ -227,6 +165,8 @@ $(document).ready(function() {
     legend.addTo(map);
 
     /*********************/
+
+    $('#lu_legend').html(html_legend_lu);
 
     // Fit to overlay bounds
     //map.fitBounds([[52.330180936, -3.36476263021], [52.885998209, -4.39698523643]]);

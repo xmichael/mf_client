@@ -60,7 +60,7 @@ function add_intro_modal(_id) {
               </button>
             </div>
             <div class="modal-body">
-              ${get_transtext("intro_html")}
+              ${get_transtext("crops_intro_html")}
             </div>
           </div>
        </div>
