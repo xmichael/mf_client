@@ -1,64 +1,12 @@
 'use strict';
 
 import histories_data from '../data/histories/histories_data.js';
-import {descriptions, keywords} from './histories_ui.js';
+import {descriptions, keywords, add_intro_modal} from './histories_ui.js';
+import {get_transtext} from './mf_i18n.js';
 
 /** global namespace */
 window.GLOBALS = {};
 /*********************/
-
-/* Show intro modal and change visibility of all elements that have a class "en" or "cy"
- * depending on "lang" parameter 
- */
-
-function add_intro_modal(_id) {
-    var html = "";
-    if (window.location.search=="?lang=cy"){
-	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Hanesion Llafar</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn
-	Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn
-	cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig
-	yn Saesneg ar gael hefyd.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
-    `;
-    }
-    else{
-	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Oral Histories</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in
-                 Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall
-                 when agriculture in the area was more mixed. Limited transcripts in English also
-                 available.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
-    `;
-    }
-    $('#' + _id).html(html).modal();
-}
 
 function add_info(_map){
     /** create interactive info panel */
@@ -69,11 +17,11 @@ function add_info(_map){
         return this._div;
     };
     info.update = function (props) {
-        this._div.innerHTML = (props ?
-                               `<b>${props["Name of Farmer"]}</b><br/>
-      ${props["Name of Farm"]}<br/>
-      ${props["Date of Recording"]}`
-                               : 'Click on a <b>mic</b> icon');
+        this._div.innerHTML = props ?
+            `<b>${props["Name of Farmer"]}</b><br/>
+                ${props["Name of Farm"]}<br/>
+                ${props["Date of Recording"]}`
+            : get_transtext("hi_clickonmic");
     };
 
     return info.addTo(_map);
@@ -101,7 +49,7 @@ function create_html_popup( feature ){
       <div class="text-center">
         <button type="button" class="btn btn-link"
           onclick="GLOBALS.descriptions.modal('description_modal', GLOBALS.history_props.${base})">
-          See more
+          ${get_transtext("hi_see_more")}
         </button>
       </div>
       <div>
@@ -217,7 +165,7 @@ $(document).ready(function() {
     add_intro_modal('description_modal');
     
     //console.log(histories_data);
-    var set = keywords.createSet(histories_data,"Keywords");
+    var set = keywords.createSet(histories_data, (window.location.search=="?lang=cy")? "Keywords-cy": "Keywords");
     $('#histories_keywords').html(keywords.createHTML(set));
 
     /* handler when user clicks on a filter */
@@ -233,7 +181,7 @@ $(document).ready(function() {
 
 		// check each feature's keywords have at least one keyword in the "checked" set.
 		// If yes, make those features visible
-		for ( var k of layer.feature.properties["Keywords"]){
+		for ( var k of layer.feature.properties[(window.location.search=="?lang=cy")? "Keywords-cy": "Keywords"]){
 		    if (checked.has(k)){
 			if ( layer.getElement().style.display == 'none'){
 			    // console.log("re-adding removed layer:" + layer.feature.properties["Clip Name"]);
@@ -245,15 +193,6 @@ $(document).ready(function() {
 		// no keyword found. Hide the feature
 		//console.log("removing layer:" + layer.feature.properties["Clip Name"]);
 		layer.getElement().style.display = 'none';
-
-		
 	    });
-
 	});
-
-    /*********************/
-
-    // Fit to overlay bounds
-    //map.fitBounds([[52.330180936, -3.36476263021], [52.885998209, -4.39698523643]]);
-
 });

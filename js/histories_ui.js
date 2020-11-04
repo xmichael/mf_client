@@ -1,3 +1,59 @@
+import {get_transtext} from './mf_i18n.js';
+
+/* Show intro modal and change visibility of all elements that have a class "en" or "cy"
+ * depending on "lang" parameter 
+ */
+
+function add_intro_modal(_id) {
+    var html = "";
+    if (window.location.search=="?lang=cy"){
+	html = `
+      <!-- modal-{sm,lg,xl} -->
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hanesion Llafar</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn
+	Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn
+	cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig
+	yn Saesneg ar gael hefyd.</p>
+            </div>
+          </div>
+       </div>
+      </div> <!-- modal-dialog -->
+    `;
+    }
+    else{
+	html = `
+      <!-- modal-{sm,lg,xl} -->
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Oral Histories</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in
+                 Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall
+                 when agriculture in the area was more mixed. Limited transcripts in English also
+                 available.</p>
+            </div>
+          </div>
+       </div>
+      </div> <!-- modal-dialog -->
+    `;
+    }
+    $('#' + _id).html(html).modal();
+}
+
+
 var descriptions = {
     createHTML: function(feature){
 
@@ -7,7 +63,13 @@ var descriptions = {
 	var farmer = props["Name of Farmer"];
 	var farm = props["Name of Farm"];
 	var description = props["Description"];
-	var keywords = props["Keywords"].join();
+	var keywords;
+	if (window.location.search=="?lang=cy"){
+	    keywords = props["Keywords-cy"].join();
+	}
+	else{
+	    keywords = props["Keywords"].join();
+	}
 	var date = props["Date of Recording"];
 	var pics = props["Pictures"];
 	/** Assumes paths are ./base/pictures[0].jpg */
@@ -78,12 +140,12 @@ var descriptions = {
                 <div class="row">
                   <div class="col-sm-6">
                     <h5>${date}</h5>
-                    <h5>Keywords:</h5>
+                    <h5>${get_transtext("hi_keywords")}:</h5>
                     <div class="font-italic">
                       ${keywords}
                     </div>
                     <hr>
-                    <h5>Description</h5>
+                    <h5>${get_transtext("hi_description")}</h5>
                     <div id="detailed-description">
                       ${description}
                     </div>
@@ -99,7 +161,7 @@ var descriptions = {
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">${get_transtext("hi_close")}</button>
           </div>
        </div>
       </div> <!-- modal-dialog -->
@@ -157,7 +219,7 @@ var keywords = {
     createHTML: function( kw_set, enabled ){
 	var enabled = enabled || new Set();
 
-	var html='<legend>Filter:</legend>';
+	var html=`<legend>${get_transtext("hi_filter")}:</legend>`;
 	for ( var k of kw_set){
 	    html+=`
       <div>`;
@@ -189,4 +251,4 @@ var keywords = {
     }
 };
 
-export {descriptions, keywords};
+export {descriptions, keywords, add_intro_modal};

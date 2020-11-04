@@ -70,7 +70,13 @@ ardal
     "lu_settlement" : ["Settlement","Aneddiad"],
     "lu_water" : ["Water","Dŵr"],
     "lu_common" : ["Common","Comin"],
-    "lu_upland" : ["Upland","Ucheldir"]
+    "lu_upland" : ["Upland","Ucheldir"],
+    "hi_keywords" : ["Keywords","Geiriau Allweddol"],
+    "hi_description":["Description","Disgrifiad"],
+    "hi_clickonmic":["Click on the <b>mic</b> icon","Cliciwch ar yr eicon <b>meicroffon</b>"],
+    "hi_see_more":["See more","Gweler mwy"],
+    "hi_close":["Close","Cau"],
+    "hi_filter":["Filter","Hidlo"]
 };
 
 /* same as gettext but for long snippets */
