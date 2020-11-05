@@ -13,9 +13,9 @@ var colourmap = {
     "Woodland" : "#018100",
     "Settlement" : "#e21ddc",
     "Water" : "#327eef",
-    "Common land": "#FF0000",
-    "Upland": "#FF0000",
-    "Other": "#FF0000"
+    "Common land": "#f6b26b",
+    "Upland": "#53ccbc",
+    "Other": "#666666"
 };
 
 function create_filtered_geojson(_lu_map, _gj_map) {
@@ -84,7 +84,7 @@ function add_csv(_map, _url, _gj_map){
 			"stroke": true,
 			"fillColor": feature.properties.colour,
 			"weight": 3,
-			"fillOpacity": 0.6
+			"fillOpacity": 0.7
 		    };
 		}
 	    });
@@ -246,6 +246,21 @@ $(document).ready(function() {
           <svg width="20" height="20">
             <circle fill="#327eef" r="10" cx="10" cy="10"></circle>
           </svg> Water
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#f6b26b" r="10" cx="10" cy="10"></circle>
+          </svg> Common
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#53ccbc" r="10" cx="10" cy="10"></circle>
+          </svg> Upland
+        </div>
+        <div>
+          <svg width="20" height="20">
+            <circle fill="#666666" r="10" cx="10" cy="10"></circle>
+          </svg> Other
         </div>
       </div>
       </div>
