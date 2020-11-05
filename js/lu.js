@@ -48,7 +48,7 @@ $(document).ready(function() {
 //    var landuse_now =L.tileLayer('data/tiles/2019_land_use/{z}/{x}/{y}.png', {
     var landuse_now =L.tileLayer('data/tiles/2019_LU2/{z}/{x}/{y}.png', {	opacity: 1,
 	minZoom: 10,
-	maxNativeZoom: 14,
+	maxNativeZoom: 16,
 	maxZoom: 18
     });
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
     //    var landuse_1840s = L.tileLayer('data/tiles/1840s_LU_new/{z}/{x}/{y}.png', {
         var landuse_1840s = L.tileLayer('data/tiles/1840s_LU_documented_only2/{z}/{x}/{y}.png', {
 	minZoom: 10,
-	maxNativeZoom: 14,
+	maxNativeZoom: 16,
 	maxZoom: 18,
 	opacity: 1
     });
