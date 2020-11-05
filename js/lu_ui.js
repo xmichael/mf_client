@@ -42,7 +42,7 @@ var html_legend_lu =`
                 </div>
                 <div>
                   <svg width="20" height="20">
-                    <circle fill="#2ece76" r="10" cx="10" cy="10"></circle>
+                    <circle fill="#f6b26b" r="10" cx="10" cy="10"></circle>
                   </svg> ${get_transtext("lu_common")}
                 </div>
                 <div>
