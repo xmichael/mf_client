@@ -41,7 +41,6 @@ function create_filtered_geojson(_lu_map, _gj_map) {
     return featurecollection;
 }
 
-
 /* Create a fast hash/lookup table from geojson to map rowid to geometry */
 function geojson_map(gj){
     var gj_map = {};
@@ -73,7 +72,6 @@ function add_csv(_map, _url, _gj_map){
 	    }
 
 	    var filtered_geojson = create_filtered_geojson ( lu_map, _gj_map );
-	    console.log(filtered_geojson);
 	    //clear map
 	    _map.removeLayer(missing);
 	    //recreate
@@ -85,8 +83,8 @@ function add_csv(_map, _url, _gj_map){
 			"color": "#FF0000",
 			"stroke": true,
 			"fillColor": feature.properties.colour,
-			"weight": 5,
-			"opacity": 1
+			"weight": 3,
+			"fillOpacity": 0.6
 		    };
 		}
 	    });
