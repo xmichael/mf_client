@@ -22,13 +22,26 @@ function add_intro_modal(_id) {
     `;
     }
     else{
+    // 	html = `
+    //           <p class="small" >Explore the data using this simple <b>decision support
+    // 		 tool</b> to help identify fields suitable for the restoration of
+    // 		 historical agricultural activity. Using potential carbon storage data,
+    // 		 susceptibility to erosion data and information on historical use of
+    // 		 the field, users can <b>vary the weightings applied to see the effect on
+    // 		 which fields are identified as greater or lesser opportunities</b>.</p>
+    // `;
 	html = `
-              <p class="small" >Explore the data using this simple <b>decision support
-		 tool</b> to help identify fields suitable for the restoration of
-		 historical agricultural activity. Using potential carbon storage data,
-		 susceptibility to erosion data and information on historical use of
-		 the field, users can <b>vary the weightings applied to see the effect on
-		 which fields are identified as greater or lesser opportunities</b>.</p>
+             <p class="small">This interactive map has been developed
+             to allow you to identify fields within the DBR that could
+             be <b>suitable for agricultural activity</b> (i.e. where you
+             could grow crops). Three important factors have been
+             considered when identifying fields suitable for this
+             opportunity: how the field was used historically, how
+             good the field is at storing carbon and how susceptible
+             the field is to erosion. The interactive map allows you
+             to chose <b>which factor(s) are of greatest importance to
+             you</b> which, in turn, changes which fields are identified
+             as greater or lesser opportunities.</p>
     `;
     }
     $('#' + _id).html(html);
