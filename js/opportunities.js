@@ -14,60 +14,34 @@ function add_intro_modal(_id) {
     var html = "";
     if (window.location.search=="?lang=cy"){
 	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Mapiau Cyfle</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
+              <p class="small" >Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
 		 nodi caeau sy&#39;n addas ar gyfer adfer gweithgaredd amaethyddol hanesyddol. Gan
 		 ddefnyddio data storio carbon posib, tueddiad i ddata erydiad a gwybodaeth am ddefnydd
 		 hanesyddol o&#39;r cae, gall defnyddwyr amrywio&#39;r pwysiadau a gymhwysir i weld yr effaith
 		 y mae caeau&#39;n cael eu nodi fel cyfleoedd mwy neu lai.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
     `;
     }
     else{
 	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Opportunity Maps</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Explore the data using this simple decision support
-		 tool to help identify fields suitable for the restoration of
-		 historical agricultural activity. Using potential Carbon storage data,
+              <p class="small" >Explore the data using this simple <b>decision support
+		 tool</b> to help identify fields suitable for the restoration of
+		 historical agricultural activity. Using potential carbon storage data,
 		 susceptibility to erosion data and information on historical use of
-		 the field, users can vary the weightings applied to see the effect on
-		 which fields are identified as greater or lesser opportunities.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
+		 the field, users can <b>vary the weightings applied to see the effect on
+		 which fields are identified as greater or lesser opportunities</b>.</p>
     `;
     }
-    $('#' + _id).html(html).modal();
+    $('#' + _id).html(html);
 }
 
 
 function set_spinner(timeout){
     var spinner = $('.spinner');
     spinner.show();
+    document.body.style.cursor = 'wait';    
     setTimeout(function() {
 	spinner.hide();
+	document.body.style.cursor = 'default';
     }, timeout);
 
 }
@@ -170,7 +144,7 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 		console.log("fieldid:", feature.properties.fieldid, "d: ",d);
 	    }*/
 	    style["fillColor"] =
-		d==5 ? '#b30000' :
+		d>=5 ? '#b30000' :
 		d==4 ? '#e34a33' :
 		d==3 ? '#fc8d59' :
 		d==2 ? '#fdcc8a' :
@@ -215,10 +189,10 @@ function add_opportunities_polygons(_map, _opportunities, _info){
 }
 
 /* Initialize window.GLOBALS.op_constraints from the input values on the sidebar controls */
-async function op_constraints_refresh(){
-    var historicalweight = parseFloat(document.getElementById("historicalweight_output").value);
-    var carbonweight = parseFloat(document.getElementById("carbonweight_output").value);
-    var erosionweight = parseFloat(document.getElementById("erosionweight_output").value);
+function op_constraints_refresh(){
+    var historicalweight = parseFloat(document.getElementById("historicalweight").value);
+    var carbonweight = parseFloat(document.getElementById("carbonweight").value);
+    var erosionweight = parseFloat(document.getElementById("erosionweight").value);
     var force_historical = document.getElementById("force_historical").checked;
 
     window.GLOBALS.op_constraints={
@@ -295,7 +269,7 @@ $(document).ready(function() {
     window.GLOBALS.info = add_info(map);
 
     /* Popup introduction when visiting page */
-    add_intro_modal('description_modal');
+    add_intro_modal('help');
 
     /* default values are set here (and not really in the HTML val attribute ) */
     $('#historicalweight').val(0.5);
