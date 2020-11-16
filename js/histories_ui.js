@@ -6,50 +6,23 @@ import {get_transtext} from './mf_i18n.js';
 
 function add_intro_modal(_id) {
     var html = "";
-    if (window.location.search=="?lang=cy"){
-	html = `
+    html = `
       <!-- modal-{sm,lg,xl} -->
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Hanesion Llafar</h5>
+              <h5 class="modal-title">${get_transtext("hi_intro_title")}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn
-	Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn
-	cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig
-	yn Saesneg ar gael hefyd.</p>
+              ${get_transtext("hi_intro_body")}
             </div>
           </div>
        </div>
       </div> <!-- modal-dialog -->
     `;
-    }
-    else{
-	html = `
-      <!-- modal-{sm,lg,xl} -->
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Oral Histories</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in
-                 Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall
-                 when agriculture in the area was more mixed. Limited transcripts in English also
-                 available.</p>
-            </div>
-          </div>
-       </div>
-      </div> <!-- modal-dialog -->
-    `;
-    }
     $('#' + _id).html(html).modal();
 }
 
@@ -62,7 +35,13 @@ var descriptions = {
 	var base = props["Clip Name"];
 	var farmer = props["Name of Farmer"];
 	var farm = props["Name of Farm"];
-	var description = props["Description"];
+	var description;
+	if (window.location.search=="?lang=cy"){
+	    description =  props["Description-cy"];
+	}
+	else{
+	    description =  props["Description"];
+	}
 	var keywords;
 	if (window.location.search=="?lang=cy"){
 	    keywords = props["Keywords-cy"].join();

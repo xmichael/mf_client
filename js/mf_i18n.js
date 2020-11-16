@@ -76,7 +76,9 @@ ardal
     "hi_clickonmic":["Click on the <b>mic</b> icon","Cliciwch ar yr eicon <b>meicroffon</b>"],
     "hi_see_more":["See more","Gweler mwy"],
     "hi_close":["Close","Cau"],
-    "hi_filter":["Filter","Hidlo"]
+    "hi_filter":["Filter","Hidlo"],
+    "hi_intro_title":["Oral Histories","Hanesion Llafar"],
+    "hi_intro_body":[`<p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall when agriculture in the area was more mixed. Limited transcripts in English also available.</p>`,`<p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig yn Saesneg ar gael hefyd.</p>`]
 };
 
 /* same as gettext but for long snippets */
