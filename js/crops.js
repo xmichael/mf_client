@@ -36,13 +36,6 @@ function CSCP_bind_all_inputs(_map){
 function add_geotiff(_map, _url){
     /** Add GeoTIFFs */
 
-    //clear map
-    _map.eachLayer( function(x){
-        if (x instanceof GeoRasterLayer){
-            _map.removeLayer(x);
-        }
-    });
-
     //add new _url
     fetch(_url)
         .then(response => response.arrayBuffer())
@@ -69,6 +62,13 @@ function add_geotiff(_map, _url){
                         return null;
                     }
                 });
+		//clear map after fetching new one
+		_map.eachLayer( function(x){
+		    if (x instanceof GeoRasterLayer){
+			_map.removeLayer(x);
+		    }
+		});
+		//add new one		
                 layer.addTo(_map);
             });
         });  
