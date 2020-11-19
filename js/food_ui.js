@@ -1,3 +1,5 @@
+import {get_transtext} from './mf_i18n.js';
+
 var utils = {
     get_translated_property: function(prop, key){
 	if (window.location.search=="?lang=cy"){
@@ -29,7 +31,7 @@ var descriptions = {
 	/* create carousel section when there are pictures available */
 	var _carousel_html = "";
 	if (pics.length > 0){
-	    _carousel_html = `<h5 class="text-muted">Pictures</h5>
+	    _carousel_html = `<h5 class="text-muted">${get_transtext("food_pictures")}</h5>
                     <hr>
     <div id="carouselPictures" class="carousel" data-interval="false" data-ride="carousel">
               <div class="carousel-inner">`;
@@ -67,7 +69,7 @@ var descriptions = {
 	//onlt add "produce" section when keywords are defined
 	var _produce_html = "";
 	if (keywords.length > 0){
-	    _produce_html = `                    <h5 class="text-muted">Produce</h5>
+	    _produce_html = `                    <h5 class="text-muted">${get_transtext("food_produce")}</h5>
                     <hr>
                     <span class="font-italic">${keywords}</span>`;
 	}
@@ -75,21 +77,21 @@ var descriptions = {
 	//only add "follow" section if facebook is defined
 	var _follow_html = "";
 	if (facebook.length > 0){
-	    _follow_html = `<h5 class="text-muted">Follow</h5>
+	    _follow_html = `<h5 class="text-muted">${get_transtext("food_follow")}</h5>
                     <hr>
                     <a href="${facebook}"><i class="fa fa-facebook-square fa-2x"></i></a>`;
 	}
 
 
-	console.log(telephone);
+	//console.log(telephone);
 	var __contact_name_html = contact_name != "" ? `<b>${contact_name}</b><br>` : "";
 	var __telephone_html = telephone != "" ? `<i>${telephone}</i><br>` : "";
-	var __homepage_html = website != "" ? `<a href="${website}">homepage</a><br>` : "";
+	var __homepage_html = website != "" ? `<a href="${website}">${get_transtext("food_homepage")}</a><br>` : "";
 	var __address_html = address != "" ? `${address}<br>` : "";
 	var __email_html = email != "" ? `<a href="mailto:${email}">${email}</a><br>` : "";
 	    
 	//add contact section (even if empty)
-	var _contact_html =` <h5 class="text-muted">Contact</h5>
+	var _contact_html =` <h5 class="text-muted">${get_transtext("food_contact")}</h5>
                     <hr>
                     ${__contact_name_html}
                     <small>                    
@@ -116,7 +118,7 @@ var descriptions = {
                 <div class="row">
                   <div class="col-sm-6">
                       ${_produce_html}
-                    <h5 class="pt-3 text-muted">Description</h5>
+                    <h5 class="pt-3 text-muted">${get_transtext("food_description")}</h5>
                     <hr>
                       ${description}
                   </div>
@@ -187,7 +189,7 @@ var keywords = {
     createHTML: function( kw_set, enabled ){
 	var enabled = enabled || new Set();
 
-	var html='<h5>Produce:</h5>';
+	var html=`<h5>${get_transtext("food_produce")}:</h5>`;
 	for ( var k of kw_set){
 	    if (k === ""){
 		continue;

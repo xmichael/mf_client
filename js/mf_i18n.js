@@ -120,7 +120,32 @@ ardal
     "hi_close":["Close","Cau"],
     "hi_filter":["Filter","Hidlo"],
     "hi_intro_title":["Oral Histories","Hanesion Llafar"],
-    "hi_intro_body":[`<p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall when agriculture in the area was more mixed. Limited transcripts in English also available.</p>`,`<p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig yn Saesneg ar gael hefyd.</p>`]
+    "hi_intro_body":[`<p>Click on an icon and listen to the recollections (in Welsh) of older generation farmers in Bro Ddyfi - who have seen many significant changes in their lifetimes and often recall when agriculture in the area was more mixed. Limited transcripts in English also available.</p>`,`<p>Cliciwch ar eicon a gwrandewch ar atgofion (yn Gymraeg) ffermwyr cenhedlaeth hŷn yn Bro Ddyfi - sydd wedi gweld llawer o newidiadau sylweddol yn eu hoes ac yn aml yn cofio pan oedd amaethyddiaeth yn yr ardal yn fwy cymysg. Trawsgrifiadau cyfyngedig yn Saesneg ar gael hefyd.</p>`],
+    "food_intro_title":['Producers &amp; Distributors','Cynhyrchwyr a Dosbarthwyr'],
+    "food_intro_body":[`<p>The map shows enterprises (click on icons for detail) involved in the local Bro Ddyfi
+		  food system - the emphasis is on produce grown, sold and consumed in the local area
+		  using agroecological practices.
+		  For us, it’s important to build the local food economy and develop the local market. It
+		  helps address the climate crisis, improves food security and, if grown using non intensive,
+		  nature friendly agroecological methods, helps address the loss of biodiversity in Wales.</p>
+
+               <p>If you would like to discuss having your business added, please get in touch.</p>`,
+		  `<p>Mae&#39;r map yn dangos mentrau (cliciwch ar eiconau am fanylion) sy&#39;n ymwneud â system
+		   fwyd leol Bro Ddyfi - mae&#39;r pwyslais ar gynnyrch sy&#39;n cael ei dyfu, ei werthu a&#39;i fwyta yn
+		   yr ardal leol gan ddefnyddio arferion agroecolegol.
+		   I ni, mae&#39;n bwysig adeiladu&#39;r economi fwyd leol a datblygu&#39;r farchnad leol. Mae&#39;n helpu i
+		   fynd i&#39;r afael â&#39;r argyfwng hinsawdd, yn gwella diogelwch bwyd ac, os caiff ei dyfu gan
+		   ddefnyddio dulliau agroecolegol nad ydynt yn ddwys, sy&#39;n gyfeillgar i natur, mae&#39;n helpu
+		   i fynd i&#39;r afael â cholli bioamrywiaeth yng Nghymru.</p>
+		   <p>Os hoffech drafod ychwanegu eich busnes, cysylltwch â ni.</p>`
+		      ],
+    "food_click_on_food_icon":['Click on a <b>food or store</b> icon','Cliciwch ar eicon bwyd neu siop'],
+    "food_produce":['Produce','Cynnyrch'],
+    "food_description":['Description','Disgrifiad'],
+    "food_pictures":['Pictures','Lluniau'],
+    "food_contact":['Contact','Cyswllt'],
+    "food_follow":['Follow','Dilyn'],
+    "food_homepage":['homepage','hafan']
 };
 
 /* same as gettext but for long snippets */
