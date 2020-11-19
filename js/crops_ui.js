@@ -102,7 +102,7 @@ function add_intro_modal(_id) {
     
     var html_legend_alc2 =`
     <div class="d-flex flex-row justify-content-center">
-       <h5>Predictive ALC grades</h5>
+       <h5>${get_transtext("crops_alc_legened_title")}</h5>
     </div>
     <div class="d-flex flex-row">
         <div class="d-flex flex-column">
@@ -110,49 +110,49 @@ function add_intro_modal(_id) {
               <svg width="20" height="20">
                 <circle fill="#0182fe" r="10" cx="10" cy="10"></circle>
               </svg>
-              Excellent quality agr. land
+              ${get_transtext("crops_alc_excellent")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#c1f9ff" r="10" cx="10" cy="10"></circle>
               </svg> 
-              Very good quality agr. land
+              ${get_transtext("crops_alc_very_good")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#008200" r="10" cx="10" cy="10"></circle>
               </svg>
-              Good quality agr. land
+              ${get_transtext("crops_alc_good")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#a7fca4" r="10" cx="10" cy="10"></circle>
               </svg>
-              Moderate quality agr. land
+              ${get_transtext("crops_alc_moderate")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#fbfa65" r="10" cx="10" cy="10"></circle>
               </svg>
-              Poor quality agr. land
+              ${get_transtext("crops_alc_poor")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#b4875e" r="10" cx="10" cy="10"></circle>
               </svg>
-              Very poor quality agr. land
+              ${get_transtext("crops_alc_very_poor")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#fec355" r="10" cx="10" cy="10"></circle>
               </svg>
-              Non-agricultural
+              ${get_transtext("crops_alc_non_agricultural")}
             </div>
             <div>
               <svg width="20" height="20">
                 <circle fill="#fe6256" r="10" cx="10" cy="10"></circle>
               </svg>
-              Urban
+              ${get_transtext("crops_alc_urban")}
             </div>
         </div>
     </div>`;
