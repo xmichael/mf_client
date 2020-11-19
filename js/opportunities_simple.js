@@ -1,6 +1,7 @@
 'use strict';
 
 import op_data from '../data/opportunities/opport_wgs84.js';
+import {get_transtext, flip_l10n} from './mf_i18n.js';
 
 /** global namespace */
 window.GLOBALS = {};
@@ -11,39 +12,7 @@ window.GLOBALS = {};
  */
 
 function add_intro_modal(_id) {
-    var html = "";
-    if (window.location.search=="?lang=cy"){
-        html = `
-              <p class="small" >Archwiliwch y data gan ddefnyddio&#39;r offeryn cefnogi penderfyniadau syml hwn i helpu i
-                 nodi caeau sy&#39;n addas ar gyfer adfer gweithgaredd amaethyddol hanesyddol. Gan
-                 ddefnyddio data storio carbon posib, tueddiad i ddata erydiad a gwybodaeth am ddefnydd
-                 hanesyddol o&#39;r cae, gall defnyddwyr amrywio&#39;r pwysiadau a gymhwysir i weld yr effaith
-                 y mae caeau&#39;n cael eu nodi fel cyfleoedd mwy neu lai.</p>
-    `;
-    }
-    else{
-    //  html = `
-    //           <p class="small" >Explore the data using this simple <b>decision support
-    //           tool</b> to help identify fields suitable for the restoration of
-    //           historical agricultural activity. Using potential carbon storage data,
-    //           susceptibility to erosion data and information on historical use of
-    //           the field, users can <b>vary the weightings applied to see the effect on
-    //           which fields are identified as greater or lesser opportunities</b>.</p>
-    // `;
-        html = `
-             <p class="small">This interactive map has been developed
-             to allow you to identify fields within the DBR that could
-             be <b>suitable for agricultural activity</b> (i.e. where you
-             could grow crops). Three important factors have been
-             considered when identifying fields suitable for this
-             opportunity: how the field was used historically, how
-             good the field is at storing carbon and how susceptible
-             the field is to erosion. The interactive map allows you
-             to chose <b>which factor(s) are of greatest importance to
-             you</b> which, in turn, changes which fields are identified
-             as greater or lesser opportunities.</p>
-    `;
-    }
+    var html = get_transtext("op_intro_html");
     $('#' + _id).html(html);
 }
 
@@ -88,14 +57,14 @@ function add_info(_map){
         return this._div;
     };
     info.update = function (props) {
-        this._div.innerHTML = (props ?
-                               `<b>Erosion risk</b>: ${parseFloat(props["erosionrisk-11072020"]).toFixed(2)}<br/>
-      <b>Carbon risk</b>: ${props["carbonrisk"]}<br/>
-      <b>Erosion score (0-5)</b>: ${props["erosion_score"]}<br/>
-      <b>Carbon score (0-5)</b>: ${props["carbon_score"]}<br/>
-      <b>Historical score (0,1)</b>: ${props["historical_score"]}<br/>
-      <b>Opportunity score</b>: ${calculate_opportunity_score(props)}`
-                               : 'Click on a <b>field</b> for extra info');
+        this._div.innerHTML = props ?
+      `<b>${get_transtext("op_erosion_risk")}</b>: ${parseFloat(props["erosionrisk-11072020"]).toFixed(2)}<br/>
+      <b>${get_transtext("op_carbon_risk")}</b>: ${props["carbonrisk"]}<br/>
+      <b>${get_transtext("op_erosion_score")} (0-5)</b>: ${props["erosion_score"]}<br/>
+      <b>${get_transtext("op_carbon_score")} (0-5)</b>: ${props["carbon_score"]}<br/>
+      <b>${get_transtext("op_historical_score")} (0,1)</b>: ${props["historical_score"]}<br/>
+      <b>${get_transtext("op_opp_score")}</b>: ${calculate_opportunity_score(props)}`
+                               : get_transtext('op_map_hover');
     };
 
     return info.addTo(_map);
@@ -107,7 +76,7 @@ function create_html_popup( feature ){
     var props = feature.properties;
     var base = props["ogc_fid"];
     var join_message = props["fieldid_1840"] === null ?
-        "No historical arable/pasture landuse found" : `joined to ${props["fieldid_1840"]}`;
+        get_transtext("op_no_historical_lu_found") : `joined to ${props["fieldid_1840"]}`;
 
     var score = calculate_opportunity_score(props);
     var _constraints = window.GLOBALS.op_constraints;
@@ -118,14 +87,14 @@ function create_html_popup( feature ){
       <b>ogc_fid</b>: ${props["ogc_fid"]}<br/>
       <b>1840 ids</b>: ${props["id_1840"]}<br/>
       <b>fieldid</b>: ${props["fieldid"]}<br/>
-      <b>land use now</b>: ${props["class"]}<br/>
-      <b>land use 1840s (${join_message})</b>: ${props["class_1840"]}<br/>
-      <b>Erosion risk</b>: ${parseFloat(props["erosionrisk-11072020"]).toFixed(2)}<br/>
-      <b>Carbon risk</b>: ${props["carbonrisk"]}<br/>
-      <b>Erosion score (0-5)</b>: ${props["erosion_score"]}<br/>
-      <b>Carbon score (0-5)</b>: ${props["carbon_score"]}<br/>
-      <b>Historical score (0,1)</b>: ${props["historical_score"]}<br/>
-      <b>Opportunity score</b>: ${score}<br/>
+      <b>${get_transtext("op_land_use_now")}</b>: ${props["class"]}<br/>
+      <b>${get_transtext("op_land_use_1840s")} (${join_message})</b>: ${props["class_1840"]?props["class_1840"]:""}<br/>
+      <b>${get_transtext("op_erosion_risk")}</b>: ${parseFloat(props["erosionrisk-11072020"]).toFixed(2)}<br/>
+      <b>${get_transtext("op_carbon_risk")}</b>: ${props["carbonrisk"]}<br/>
+      <b>${get_transtext("op_erosion_score")} (0-5)</b>: ${props["erosion_score"]}<br/>
+      <b>${get_transtext("op_carbon_score")} (0-5)</b>: ${props["carbon_score"]}<br/>
+      <b>${get_transtext("op_historical_score")} (0,1)</b>: ${props["historical_score"]}<br/>
+      <b>${get_transtext("op_opp_score")}</b>: ${score}<br/>
       <b>Score Calculation</b>: ${score_debug}
     </div>
   `;
@@ -232,6 +201,10 @@ function submit_cb(){
 
 $(document).ready(function() {
 
+    flip_l10n();
+    // hide sidebar until everything is ready using visibility trick (don't touch display) 
+    $('#sidebar').removeClass('invisible');
+    
     /** export Globals -- needed for inline onclick events and for debugging */
     window.GLOBALS = {
         leaflet_map : undefined,
@@ -307,14 +280,14 @@ $(document).ready(function() {
         var div = L.DomUtil.create('div', 'info legend');
         div.innerHTML += `
     <div class="d-flex flex-column">
-      <div class="d-flex flex-row justify-content-center"><h5>Opportunity score</h5></div>
+      <div class="d-flex flex-row justify-content-center"><h5>${get_transtext("op_opp_score")}</h5></div>
       <div class="d-flex flex-row">
         <div class="d-flex flex-column">
           <div>
             <svg width="20" height="20">
               <circle fill="#b30000" r="10" cx="10" cy="10"></circle>
             </svg>
-            5  Highest
+            5  ${get_transtext("op_highest")}
           </div>
           <div>
             <svg width="20" height="20">
@@ -338,7 +311,7 @@ $(document).ready(function() {
             <svg width="20" height="20">
               <circle fill="#fef0d9" r="10" cx="10" cy="10"></circle>
             </svg>
-            1  Lowest
+            1  ${get_transtext("op_lowest")}
           </div>
         </div>
     </div>

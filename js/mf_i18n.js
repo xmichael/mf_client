@@ -59,6 +59,48 @@ dod i ben <p/> Cymharwch â&#39;r map Dosbarthiad Tir Amaethyddol
 Rhagfynegol cyfredol sy&#39;n graddio ansawdd tir amaethyddol yn yr
 ardal
 `],
+    "crops_alc_legened_title" : ['Predictive ALC grades', 'Graddau ALC Rhagfynegol'],
+    "crops_alc_excellent" : ['Excellent quality agr. land', 'Tir amaeth o ansawdd rhagorol'],
+    "crops_alc_very_good" : ['Very good quality agr. land', 'Tir amaeth o ansawdd da iawn'],
+    "crops_alc_good" : ['Good quality agr. land', 'Tir amaeth o ansawdd da'],
+    "crops_alc_moderate" : ['Moderate quality agr. land', 'Tir amaeth o ansawdd cymedrol'],
+    "crops_alc_poor" : ['Poor quality agr. land' ,'Tir amaeth o ansawdd gwael'],
+    "crops_alc_very_poor" : ['Very poor quality agr. land', 'Tir amaeth o ansawdd gwael iawn'],
+    "crops_alc_non_agricultural" : ["Non-agricultural", "Tir nad yw'n amaethyddol"],
+    "crops_alc_urban" : ["Urban", "Trefol"],
+    "op_intro_html" : [`<p class="small">This interactive map has been developed
+			to allow you to identify fields within the DBR that could
+			be <b>suitable for agricultural activity</b> (i.e. where you
+			could grow crops). Three important factors have been
+			considered when identifying fields suitable for this
+			opportunity: how the field was used historically, how
+			good the field is at storing carbon and how susceptible
+			the field is to erosion. The interactive map allows you
+			to chose <b>which factor(s) are of greatest importance to
+			you</b> which, in turn, changes which fields are identified
+			as greater or lesser opportunities.</p>`,
+                        `<p class="small" >Mae'r map rhyngweithiol hwn wedi'i ddatblygu i'ch
+			galluogi i nodi caeau o fewn y Gwarchodfa Biosffer Dyfi a allai fod yn
+			addas ar gyfer gweithgaredd amaethyddol (h.y. lle y gallech chi dyfu
+			cnydau). Ystyriwyd tri ffactor pwysig wrth nodi caeau sy'n addas ar
+			gyfer y cyfle hwn: sut y defnyddiwyd y cae yn hanesyddol, pa mor dda
+			yw'r cae wrth storio carbon a pha mor agored yw'r cae i erydiad. Mae'r
+			map rhyngweithiol yn caniatáu ichi ddewis pa ffactor (ion) sydd
+			bwysicaf i chi sydd, yn ei dro, yn newid pa gaeau sy'n cael eu
+			hadnabod fel caeau a mwy neu lai o gyfleoedd addas.</p>`],
+    "op_highest" : [ "Highest", "Uchaf" ],
+    "op_lowest" : [ "Lowest", "Isaf" ],
+    "op_opp_score" : [ "Opportunity score", "Sgôr cyfle" ],
+    "op_erosion_risk" : [ "Erosion risk", "Risg erydiad" ],
+    "op_carbon_risk" : [ "Carbon risk", "Risg carbon" ],
+    "op_erosion_score" : [ "Erosion score", "Sgôr erydiad" ],
+    "op_carbon_score" : [ "Carbon score", "Sgôr carbon" ],
+    "op_historical_score" : [ "Historical score", "Sgôr Hanesyddol" ],
+    "op_land_use_now" : [ "land use now", "defnydd tir rwan" ],
+    "op_land_use_1840s" : [ "land use 1840s", "defnydd tir 1840au" ],
+    "op_map_hover" : [ 'Click on a <b>field</b> for extra info', 'Cliciwch ar <b>gae</b> i gael gwybodaeth ychwanegol' ],
+    "op_no_historical_lu_found" : ["No historical arable/pasture landuse found",
+				   "Ni ddarganfuwyd unrhyw ddefnydd tir âr / porfa hanesyddol"],
     "lu_land_use" : [ "Land use", "Defnydd Tir" ],
     "lu_1840s" : [ "1840s", "1840au" ],
     "lu_1930s" : [ "1930s", "1930au" ],
