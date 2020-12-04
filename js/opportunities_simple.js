@@ -95,7 +95,7 @@ function create_html_popup( feature ){
       <b>${get_transtext("op_carbon_score")} (0-5)</b>: ${props["carbon_score"]}<br/>
       <b>${get_transtext("op_historical_score")} (0,1)</b>: ${props["historical_score"]}<br/>
       <b>${get_transtext("op_opp_score")}</b>: ${score}<br/>
-      <b>Score Calculation</b>: ${score_debug}
+      <b>${get_transtext("op_score_calculation")}</b>: ${score_debug}
     </div>
   `;
 }

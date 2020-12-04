@@ -22,14 +22,14 @@ function add_intro_modal(_id) {
     `;
     }
     else{
-    // 	html = `
-    //           <p class="small" >Explore the data using this simple <b>decision support
-    // 		 tool</b> to help identify fields suitable for the restoration of
-    // 		 historical agricultural activity. Using potential carbon storage data,
-    // 		 susceptibility to erosion data and information on historical use of
-    // 		 the field, users can <b>vary the weightings applied to see the effect on
-    // 		 which fields are identified as greater or lesser opportunities</b>.</p>
-    // `;
+    /*	html = `
+              <p class="small" >Explore the data using this simple <b>decision support
+    		 tool</b> to help identify fields suitable for the restoration of
+    		 historical agricultural activity. Using potential carbon storage data,
+    		 susceptibility to erosion data and information on historical use of
+    		 the field, users can <b>vary the weightings applied to see the effect on
+    		 which fields are identified as greater or lesser opportunities</b>.</p>
+    `;
 	html = `
              <p class="small">This interactive map has been developed
              to allow you to identify fields within the DBR that could
@@ -42,7 +42,16 @@ function add_intro_modal(_id) {
              to chose <b>which factor(s) are of greatest importance to
              you</b> which, in turn, changes which fields are identified
              as greater or lesser opportunities.</p>
-    `;
+	     `; */
+	html = `<p class="small">
+                        <i>This interactive map shows the opportunities for growing crops in the Dyfi Biosphere, field by field. The darker the field colour, the greater the opportunity. A high opportunity score favours cultivation, based upon the combination of three factors:</i>
+                </p>
+         <span class="small">1. <b>Historic use</b>: If a field was under cultivation in 1840, that suggests it might be suitable again and would increase the opportunity.</span><br/>
+         <span class="small">2. <b>Carbon storage</b>: This refers to the carbon that is stored in vegetation, whether grass, crops or woodland. For example, cereals hold very little carbon compared to woodland. The map therefore gives a high score to fields that would not negatively affect carbon storage if they were lost or converted to arable.</span><br/>
+         <span class="small">3. <b>The risk of soil erosion</b>: Steep slopes that have little to no vegetation cover present a greater risk of soil erosion compared to shallow slopes with good vegetation cover, such as woodland and shrubland. Ploughing grassland (or felling trees) to grow crops exposes the soil to wind and rain, leading to erosion and increasing the risk of flooding. Fields that have a lower risk from soil erosion will have a higher opportunity score.         </span>
+
+               `;
+
     }
     $('#' + _id).html(html);
 }

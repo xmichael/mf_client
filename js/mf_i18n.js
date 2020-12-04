@@ -68,17 +68,12 @@ ardal
     "crops_alc_very_poor" : ['Very poor quality agr. land', 'Tir amaeth o ansawdd gwael iawn'],
     "crops_alc_non_agricultural" : ["Non-agricultural", "Tir nad yw'n amaethyddol"],
     "crops_alc_urban" : ["Urban", "Trefol"],
-    "op_intro_html" : [`<p class="small">This interactive map has been developed
-			to allow you to identify fields within the DBR that could
-			be <b>suitable for agricultural activity</b> (i.e. where you
-			could grow crops). Three important factors have been
-			considered when identifying fields suitable for this
-			opportunity: how the field was used historically, how
-			good the field is at storing carbon and how susceptible
-			the field is to erosion. The interactive map allows you
-			to chose <b>which factor(s) are of greatest importance to
-			you</b> which, in turn, changes which fields are identified
-			as greater or lesser opportunities.</p>`,
+    "op_intro_html" : [`<p class="small">
+                        <i>This interactive map shows the opportunities for growing crops in the Dyfi Biosphere, field by field. The darker the field colour,                         the greater the opportunity. A high opportunity score favours cultivation, based upon the combination of three factors:</i>
+                         </p>
+                         <span class="small">1. <b>Historic use</b>: If a field was under cultivation in 1840, that suggests it might be suitable again and would increase the opportunity.</span><br/>
+                         <span class="small">2. <b>Carbon storage</b>: This refers to the carbon that is stored in vegetation, whether grass, crops or woodland. For example, cereals hold very little carbon compared to woodland. The map therefore gives a high score to fields that would not negatively affect carbon storage if they were lost or converted to arable.</span><br/>
+                         <span class="small">3. <b>The risk of soil erosion</b>: Steep slopes that have little to no vegetation cover present a greater risk of soil erosion compared to shallow slopes with good vegetation cover, such as woodland and shrubland. Ploughing grassland (or felling trees) to grow crops exposes the soil to wind and rain, leading to erosion and increasing the risk of flooding. Fields that have a lower risk from soil erosion will have a higher opportunity score.</span>`,
                         `<p class="small" >Mae'r map rhyngweithiol hwn wedi'i ddatblygu i'ch
 			galluogi i nodi caeau o fewn y Gwarchodfa Biosffer Dyfi a allai fod yn
 			addas ar gyfer gweithgaredd amaethyddol (h.y. lle y gallech chi dyfu
@@ -96,6 +91,7 @@ ardal
     "op_erosion_score" : [ "Erosion score", "Sgôr erydiad" ],
     "op_carbon_score" : [ "Carbon score", "Sgôr carbon" ],
     "op_historical_score" : [ "Historical score", "Sgôr Hanesyddol" ],
+    "op_score_calculation" : [ "Score Calculation", "Cyfrifo Sgôr" ],
     "op_land_use_now" : [ "land use now", "defnydd tir rwan" ],
     "op_land_use_1840s" : [ "land use 1840s", "defnydd tir 1840au" ],
     "op_map_hover" : [ 'Click on a <b>field</b> for extra info', 'Cliciwch ar <b>gae</b> i gael gwybodaeth ychwanegol' ],
