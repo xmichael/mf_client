@@ -1,12 +1,12 @@
 'use strict';
 
 /** globals */
-const JSONURL='../data/apport_wt.geojson';
+const JSONURL='data/apport_wt.geojson';
 
 const colourmap = {
     "1. " : "#007F5F", //1. Woodland
     "2. " : "#AACC00", //2. Woody places
-    "3. " : "#DDA15E"  //3. Tree names
+    "3. " : "#FF0000"  //3. Tree names
 };
 
 /** functions */
@@ -193,7 +193,7 @@ $(document).ready(function() {
         </div>
         <div>
           <svg width="20" height="20">
-            <circle fill="#DDA15E" r="8" cx="10" cy="10"></circle>
+            <circle fill="#FF0000" r="8" cx="10" cy="10"></circle>
           </svg> Tree names
         </div>
       </div>
