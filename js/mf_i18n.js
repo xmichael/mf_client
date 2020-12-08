@@ -74,15 +74,12 @@ ardal
                          <span class="small">1. <b>Historic use</b>: If a field was under cultivation in 1840, that suggests it might be suitable again and would increase the opportunity.</span><br/>
                          <span class="small">2. <b>Carbon storage</b>: This refers to the carbon that is stored in vegetation, whether grass, crops or woodland. For example, cereals hold very little carbon compared to woodland. The map therefore gives a high score to fields that would not negatively affect carbon storage if they were lost or converted to arable.</span><br/>
                          <span class="small">3. <b>The risk of soil erosion</b>: Steep slopes that have little to no vegetation cover present a greater risk of soil erosion compared to shallow slopes with good vegetation cover, such as woodland and shrubland. Ploughing grassland (or felling trees) to grow crops exposes the soil to wind and rain, leading to erosion and increasing the risk of flooding. Fields that have a lower risk from soil erosion will have a higher opportunity score.</span>`,
-                        `<p class="small" >Mae'r map rhyngweithiol hwn wedi'i ddatblygu i'ch
-			galluogi i nodi caeau o fewn y Gwarchodfa Biosffer Dyfi a allai fod yn
-			addas ar gyfer gweithgaredd amaethyddol (h.y. lle y gallech chi dyfu
-			cnydau). Ystyriwyd tri ffactor pwysig wrth nodi caeau sy'n addas ar
-			gyfer y cyfle hwn: sut y defnyddiwyd y cae yn hanesyddol, pa mor dda
-			yw'r cae wrth storio carbon a pha mor agored yw'r cae i erydiad. Mae'r
-			map rhyngweithiol yn caniatáu ichi ddewis pa ffactor (ion) sydd
-			bwysicaf i chi sydd, yn ei dro, yn newid pa gaeau sy'n cael eu
-			hadnabod fel caeau a mwy neu lai o gyfleoedd addas.</p>`],
+                        `<p class="small">
+                        <i>Mae'r map rhyngweithiol hwn yn dangos y cyfleoedd i dyfu cnydau ym Miosffer Dyfi, fesul cae. Po dywyllaf yw lliw'r cae, y mwyaf yw'r cyfle. Mae sgôr cyfle uchel yn ffafrio tyfu cnydau, yn seiliedig ar y cyfuniad o dri ffactor:</i>
+                         </p>
+                         <span class="small">1. <b>Defnydd hanesyddol</b>: Pe bai cae yn cael ei drin yn 1840, mae hynny'n awgrymu y gallai fod yn addas eto a byddai'n cynyddu'r cyfle.</span><br/>
+                         <span class="small">2. <b>Storio carbon</b>: Mae hyn yn cyfeirio at y carbon sy'n cael ei storio mewn llystyfiant, p'un a yw'n laswellt, cnydau neu goetir. Er enghraifft, ychydig iawn o garbon sydd gan rawnfwydydd o'i gymharu â choetir. Felly mae'r map yn rhoi sgôr uchel i gaeau na fyddai'n effeithio'n negyddol ar storio carbon pe byddent yn cael eu colli neu eu troi'n dir âr.</span><br/>
+                         <span class="small">3. <b>Y risg o erydiad pridd</b>: Mae llethrau serth sydd heb fawr o orchudd llystyfiant yn peri mwy o risg o erydiad pridd o'i gymharu â llethrau bas gyda gorchudd llystyfiant da, fel coetir a phrysgwydd. Mae aredig glaswelltir (neu gwympo coed) i dyfu cnydau yn dinoethi'r pridd i wynt a glaw, gan arwain at erydiad a chynyddu'r risg o lifogydd. Bydd gan gaeau sydd â risg is o erydiad pridd gyda sgôr cyfle uwch.</span>`],
     "op_highest" : [ "Highest", "Uchaf" ],
     "op_lowest" : [ "Lowest", "Isaf" ],
     "op_opp_score" : [ "Opportunity score", "Sgôr cyfle" ],
