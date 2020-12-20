@@ -1,5 +1,5 @@
 # About
-The MF information Gateway
+The Mixed Farming Information Gateway
 
 # Endpoints
 
@@ -20,7 +20,17 @@ The following endpoints are available.
 * `food.html`:
         A *"Producers & Consumers"* mapping application that shows enterprises involved in the local Bro Ddyfi food system with an emphasis on produce grown, sold and consumed in the local area using agroecological practices.(3rd party datasets are excluded)
 
+# Other Endpoints
+
+The following MF web apps are not part of the Information Gateway but are included in this repository as they use the same infrastructure:
+
+* `repair.html`:
+	A crowdsourcing app that allows people to fill in missing Land Use data with the help of any submission system that can export CSV (e.g. Google Forms).
+* `wt.html`:
+	A map visualising the results of a keyword-based inference algorithm for classifying apportionment data according to the Woodland Trust classification. (apportionment data are excluded)
+
 # Third party datasets
+
 Due to licence restrictions, all third party data products must be downloaded separately from their official providers. 
 
 # Deployment (quick start)
